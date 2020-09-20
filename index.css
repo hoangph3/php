@@ -1,0 +1,115 @@
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 12px;
+    
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    
+}
+
+.button {
+    background-color: #009879;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+
+.button2 {
+    background-color: #6272a4;
+}
+.button3 {
+    background-color: #ff79c6;
+}
+.button4 {
+    border-radius: 8px;
+    background-color: #009879;
+    font-size: 15px;
+    padding: 10;
+    width: 96%;
+    
+}
+
+form {
+    width: 50%;
+    margin-right: 300px;
+    margin-left: 300px;
+    text-align: left;
+    padding: 15px; 
+    border: 1px solid #bbbbbb; 
+    border-radius: 8px;
+}
+
+.input-group {
+    margin: 10px 0px 10px 0px;
+}
+.input-group label {
+    display: block;
+    text-align: left;
+    margin: 5px;
+    font-size: 19px;
+    
+}
+.input-group input {
+    height: 30px;
+    width: 93%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+h1 {
+    margin-left: 500px;
+    margin-left: 500px;
+    display: inline-block;
+}
+
+input[type=submit] {
+    padding:10px 15px; 
+    font-size: 15px;
+    border:none;
+    width: 96%;
+    height: 7ex;
+    outline: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 8px; 
+}
