@@ -1,71 +1,68 @@
 <!DOCTYPE html>
-<style>
-	<?php require 'index.css'; ?>
-</style>
+<link rel="stylesheet" type="text/css" href="index.css">
 <html>
 <head>
-	<title>Phòng đào tạo</title>
-	<div>
-		<h1 style="float: left;">Danh sách sinh viên</h1>
-			<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>
-	</div>
-	<!-- js de viet ham script-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<title>Trang đăng nhập</title>
+	<h1>Đăng nhập tài khoản</h1>
 </head>
 <body>
-	<table class="styled-table">
-		<thead>
-			<tr>
-				<th>Tên đăng nhập</th>
-				<th>Mật khẩu</th>
-				<th>Họ tên</th>
-				<th>Email</th>
-				<th>Số điện thoại</th>
-				<th width="50"></th>
-				<th width="50"></th>
-			</tr>
-		</thead>
-		<tbody>
+<?php require_once 'utils.php';
+session_start();
+ 
+//Xử lý đăng nhập
+if (isset($_POST['dangnhap'])) 
+{
+    $connect = mysqli_connect("127.0.0.1", "root", "", "dbsinhvien");
 
-<?php
+	// ktra connect
+	if (!$connect) {
+	    die("Connection failed: " . mysqli_connect_error());
+	}
 
-//lay thong tin tu db
-$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
-$sql = 'select * from student';
-$query = mysqli_query($conn, $sql);
-$list_student = [];
-while ($row = mysqli_fetch_array($query, 1)) {
-	$list_student[] = $row;
-}
+    //Lấy dữ liệu nhập vào tu input
+    $s_username = addslashes($_POST['username']);
+    $s_userpwd = addslashes($_POST['userpwd']);
+     
+	//kiem tra thong tin giao vien
+	$sql_teacher = "select * from teacher where username = '$s_username' and userpwd = '$s_userpwd' ";
+	$query_teacher = mysqli_query($connect, $sql_teacher);
+	$row_teacher = mysqli_fetch_array($query_teacher);
+	
+	//kiem tra thong tin sinh vien
+	$sql_student = "select * from student where username = '$s_username' and userpwd = '$s_userpwd' ";
+	$query_student = mysqli_query($connect, $sql_student);
+	$row_student = mysqli_fetch_array($query_student);
+     
+    if (($row_teacher['username'] == $s_username) && ($row_teacher['userpwd'] == $s_userpwd)){
+        $_SESSION['username'] = $row_teacher['username'];
+		$_SESSION['userpwd'] = $row_teacher['userpwd'];
 
-foreach ($list_student as $sv) {
-	echo '<tr>
-			<td>'.$sv['username'].'</td>
-			<td>'.$sv['userpwd'].'</td>
-			<td>'.$sv['fullname'].'</td>
-			<td>'.$sv['email'].'</td>
-			<td>'.$sv['phone'].'</td>
-			<td><button class="button button2" onclick=\'window.open("input.php?id='.$sv['id'].'","_self")\'>Sửa</button></td>
-			<td><button class="button button3" onclick="xoa_sv('.$sv['id'].')">Xóa</button></td>
-		</tr>';
+		header("location: "."main.php?id=".$row_teacher['id']);
+	}
+	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
+        $_SESSION['username'] = $row_student['username'];
+		$_SESSION['userpwd'] = $row_student['userpwd'];
+		
+		header("location: "."sub.php?id=".$row_student['id']);
+		die();
+	}
+	else {
+		header("location: index.php");
+	}
 }
 ?>
-		</tbody>
-	</table>
+	<form method="post" action="index.php">
+		<div class="input-group">
+			<label for="username">Tên đăng nhập</label>
+			<input required="true" type="text" class="form-control" id="username" name="username">
+		</div>
+		<div class="input-group">
+			<label for="userpwd">Mật khẩu</label>
+			<input required="true" type="password" class="form-control" id="userpwd" name="userpwd"></input>
+		</div>
+		<div class="input-group">
+                <input type="submit" class="button buton1" name="dangnhap" value="Đăng nhập"/>
+		</div>
+	</form>
 </body>
 </html>
-
-<!-- ham xoa sinh vien -->
-<script type="text/javascript">
-		function xoa_sv(id) {
-			if(confirm('Xác nhận xóa?')) {
-				$.post('delete.php', {'id': id},
-				function(data) {location.reload()})
-			}	
-		}
-</script>
-

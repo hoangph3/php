@@ -12,16 +12,14 @@ if (!empty($_POST)) {
 	$s_phone = addslashes(isset($_POST['phone']) ? $_POST['phone'] : '');
 	$s_id = addslashes(isset($_POST['id']) ? $_POST['id'] : '');
 
-	if ($s_id != '') { 
+    // chi update, ko the insert
+    if ($s_id != '') { 
 		$sql = "update student set username = '$s_username', userpwd = '$s_userpwd', 
-		fullname = '$s_fullname', email = '$s_email', phone = '$s_phone' where id = " .$s_id; //update khi co id
-	} else {
-		$sql = "insert into student(username, userpwd, fullname, email, phone) 
-		value ('$s_username', '$s_userpwd', '$s_fullname', '$s_email', '$s_phone')"; //tao sv moi
-	}
+		fullname = '$s_fullname', email = '$s_email', phone = '$s_phone' where id = " .$s_id; //update khi sv ton tai (exist id)
+	} 
 	mysqli_query($conn, $sql);
 
-	header('Location: main.php');
+	header('Location: sub.php?id='.$s_id);
 	die();
 }
 
@@ -58,7 +56,7 @@ if (isset($_GET['id'])) {
 		<div class="input-group">
 			<label for="username">Tên đăng nhập</label>
 			<input type="number" name="id" value="<?=$id?>" style="display: none;">
-			<input required="true" type="text" class="form-control" id="username" name="username" value="<?=$s_username?>">
+			<input required="true" type="text" class="form-control" id="username" name="username" value="<?=$s_username?>" readonly>
 		</div>
 		<div class="input-group">
 			<label for="userpwd">Mật khẩu</label>
@@ -66,7 +64,7 @@ if (isset($_GET['id'])) {
 		</div>
 		<div class="input-group">
 			<label for="fullname">Họ tên</label>
-			<input required="true" type="text" class="form-control" id="fullname" name="fullname" value="<?=$s_fullname?>">
+			<input required="true" type="text" class="form-control" id="fullname" name="fullname" value="<?=$s_fullname?>" readonly>
 		</div>
 		<div class="input-group">
 			<label for="email">Email</label>

@@ -59,6 +59,14 @@
 .button3 {
     background-color: #ff79c6;
 }
+.button5{
+    background-color: #fab16c;
+    font-size: 13px;
+    padding: 4px;
+
+
+}
+
 .button4 {
     border-radius: 8px;
     background-color: #009879;
@@ -85,7 +93,7 @@ form {
     display: block;
     text-align: left;
     margin: 5px;
-    font-size: 19px;
+    font-size: 18px;
     
 }
 .input-group input {
@@ -112,4 +120,23 @@ input[type=submit] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 8px; 
+}
+
+.a {
+    font-size: 20px;
+    color: #009879;
+}
+
+.city {
+    background-color: #009879;
+    color: #009879;
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+  }
+
+h3 {
+    margin-left: 500px;
+    margin-left: 500px;
+    display: inline-block;
 }
