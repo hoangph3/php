@@ -34,15 +34,15 @@ if (isset($_POST['message']))
 		$sql = "insert into message(sender, receiver, content, time) 
 		value ('$user_student', '$s_receiver', '$s_content', NOW())";
 		execute($sql); 
-		echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
-		//header("location: sub.php?id=".$list_student['id']);		
+		//echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
+		header("location: sub.php?id=".$list_student['id']);		
 	}	
 	else if (!empty($user_teacher)){
 		$sql = "insert into message(sender, receiver, content, time) 
-		value ('$user_teacher', '$s_receiver', '$s_content', NOW()";
+		value ('$user_teacher', '$s_receiver', '$s_content', NOW())";
 		execute($sql); 
-		echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
-		//header("location: main.php?id=".$list_teacher['id']);
+		//echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
+		header("location: main.php?id=".$list_teacher['id']);
 	}
 	else {
 		echo '<div><h3>Kiểm tra lại thông tin người gửi!</h3></div>';

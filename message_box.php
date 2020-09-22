@@ -7,7 +7,7 @@
 <head>
 	<title>Hộp thư</title>
 	<div>
-		<h1 style="float: left;">Tin nhắn của bạn</h1>
+		<h1 style="float: left;">Tin nhắn đã gửi</h1>
 	</div>
 	<!-- js de viet ham script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -36,7 +36,7 @@ if (isset($_GET['username'])) {
     $s_username = $_GET['username']; //ten de trich xuat table
 
     //lay thong tin tu db
-	$sql = "select * from message where sender = '$s_username' or receiver = '$s_username' "; 
+	$sql = "select * from message where sender = '$s_username' "; 
     $list_msg = execute_result($sql);
     
 	foreach ($list_msg as $msg) {
