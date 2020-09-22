@@ -106,7 +106,6 @@ form {
 }
 h1 {
     margin-left: 500px;
-    margin-left: 500px;
     display: inline-block;
 }
 
@@ -137,6 +136,10 @@ input[type=submit] {
 
 h3 {
     margin-left: 500px;
-    margin-left: 500px;
     display: inline-block;
+}
+h2 {
+    margin-left: 425px;
+    display: inline-block;
+    font-size: 30px;
 }

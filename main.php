@@ -5,8 +5,9 @@
 <html>
 <head>
 	<title>Phòng đào tạo</title>
-	<div>
-		<h1 style="float: left;">Danh sách sinh viên</h1>
+	<button class="button" style="float: left; position: relative; top: 23px; left: 5px;" onclick="window.open('up_task.php', '_self')">Đăng bài</button>
+	<div>	
+		<h2 style="float: left;">Danh sách sinh viên</h2>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>
 	</div>
 	<!-- js de viet ham script-->
@@ -74,6 +75,7 @@ if (isset($_GET['id'])) {
 }
 echo '<button class="button button1" onclick=\'window.open("message_box.php?username='.$gv['username'].'","_self")\'>Xem hộp thư</button>';
 ?>
+
 </body>
 </html>
 

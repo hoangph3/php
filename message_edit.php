@@ -17,11 +17,7 @@ if (!empty($_POST)) {
 	}
 	
 	execute($sql);
-
-	
-	
 	header('Location: message_box.php?username='.$s_sender);
-	
 	die();
 }
 
