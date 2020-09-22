@@ -6,6 +6,7 @@
 <head>
 	<title>Phòng đào tạo</title>
 	<button class="button" style="float: left; position: relative; top: 23px; left: 5px;" onclick="window.open('up_task.php', '_self')">Đăng bài</button>
+	<button class="button" style="float: left; position: relative; top: 23px; left: 10px;" onclick="window.open('show_task.php', '_self')">Xem bài tập</button>
 	<div>	
 		<h2 style="float: left;">Danh sách sinh viên</h2>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>

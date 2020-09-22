@@ -64,9 +64,7 @@
     font-size: 13px;
     padding: 4px;
 
-
 }
-
 .button4 {
     border-radius: 8px;
     background-color: #009879;
@@ -75,7 +73,6 @@
     width: 96%;
     
 }
-
 form {
     width: 50%;
     margin-right: 300px;
@@ -119,27 +116,31 @@ input[type=submit] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 8px; 
+    
 }
 
-.a {
-    font-size: 20px;
-    color: #009879;
+a:link {
+    font-size: 30px;
+    color: #6272a4;
+
 }
 
-.city {
-    background-color: #009879;
-    color: #009879;
-    border: 2px solid black;
-    margin: 20px;
-    padding: 20px;
-  }
 
-h3 {
-    margin-left: 500px;
-    display: inline-block;
-}
 h2 {
-    margin-left: 425px;
+    margin-left: 350px;
     display: inline-block;
     font-size: 30px;
 }
+
+input[type=file] {
+    padding:10px 15px; 
+    font-size: 15px;
+    border:none;
+    width: 96%;
+    height: 7ex;
+    outline: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 8px; 
+}
+
