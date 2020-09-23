@@ -58,7 +58,7 @@ if (isset($_POST['dangnhap']))
 		</div>
 		<div class="input-group">
 			<label for="userpwd">Mật khẩu</label>
-			<input required="true" type="password" class="form-control" id="userpwd" name="userpwd"></input>
+			<input required="true" type="password" class="form-control" id="userpwd" name="userpwd">
 		</div>
 		<div class="input-group">
                 <input type="submit" class="button buton1" name="dangnhap" value="Đăng nhập"/>

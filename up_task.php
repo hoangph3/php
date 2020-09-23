@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Đăng bài tập</title>
     <h1>Đăng bài tập</h1>
-    <link rel="stylesheet" href="">
 </head>
 <body>
 <form action="upload.php" method="post" enctype="multipart/form-data">
