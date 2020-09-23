@@ -9,12 +9,15 @@
 		<h1 style="float: left;">Danh sách sinh viên</h1>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('validate.php', '_self')">Sửa thông tin</button>
 	</div>
-		<!-- js de viet ham script-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="lib/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="lib/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="lib/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">
@@ -72,7 +75,12 @@ if (isset($_GET['id'])) {
 		$sv = $list_student[0];
 	}
 }
-echo '<button class="button button1" onclick=\'window.open("message_box.php?username='.$sv['username'].'","_self")\'>Xem hộp thư</button>';
+echo '<button class="button button1" onclick=\'window.open("message_box.php?username='.$sv['username'].'","_self")\'>Xem hộp thư</button><br/><br/>';//phai la username
+
+
+echo '<button class="button button1" onclick=\'window.open("show_task.php?id='.$sv['id'].'","_self")\'>Xem bài tập</button><br/><br/>'; //id cung dc 
+echo '<button class="button button1" onclick=\'window.open("solve_task.php?id='.$sv['id'].'","_self")\'>Giải bài tập</button>';
+
 ?>
 </body>
 </html>

@@ -17,6 +17,7 @@
 .styled-table th,
 .styled-table td {
     padding: 12px 12px;
+    font-size: 14px;
     
 }
 
@@ -120,7 +121,7 @@ input[type=submit] {
 }
 
 a:link {
-    font-size: 30px;
+    font-size: 15px;
     color: #6272a4;
 
 }
