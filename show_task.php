@@ -14,7 +14,7 @@
 		</thead>
 		<tbody>
 
-<?php require_once 'utils.php';
+<?php require_once 'db_helper.php';
 
 //hien thi danh sach bai tap
 $dir = "./uploads/";

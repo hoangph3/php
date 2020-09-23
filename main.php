@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<style>
-	<?php require 'index.css'; ?>
-</style>
+<link rel="stylesheet" type="text/css" href="index.css">
 <html>
 <head>
 	<title>Phòng đào tạo</title>
-	<button class="button" style="float: left; position: relative; top: 23px; left: 5px;" onclick="window.open('up_task.php', '_self')">Đăng bài</button>
-	<button class="button" style="float: left; position: relative; top: 23px; left: 10px;" onclick="window.open('show_task.php', '_self')">Xem bài tập</button>
-	<div>	
-		<h2 style="float: left;">Danh sách sinh viên</h2>
-		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>
-	</div>
-	
+	<button class="button" onclick="window.open('up_task.php', '_self')">Đăng bài</button>
+	<button class="button" onclick="window.open('show_task.php', '_self')">Xem bài tập</button>
+	<button class="button" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>	
 	<!-- jQuery library -->
 	<script src="lib/jquery.min.js"></script>
 	<!-- Popper JS -->
@@ -35,15 +29,11 @@
 		</thead>
 		<tbody>
 
-<?php
+<?php require_once 'db_helper.php';
 
 $conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
 $sql = 'select * from student';
-$query = mysqli_query($conn, $sql);
-$list_student = [];
-while ($row = mysqli_fetch_array($query, 1)) {
-	$list_student[] = $row;
-}
+$list_student = execute_result($sql);
 
 foreach ($list_student as $sv) {
 	echo '<tr>
@@ -54,7 +44,7 @@ foreach ($list_student as $sv) {
 			<td></td>
 			<td><button class="button button5" onclick=\'window.open("details_main.php?id='.$sv['id'].'","_self")\'>Chi tiết</button></td>
 			<td><button class="button button2" onclick=\'window.open("input.php?id='.$sv['id'].'","_self")\'>Sửa</button></td>
-			<td><button class="button button3" onclick="xoa_sv('.$sv['id'].')">Xóa</button></td>
+			<td><button class="button button3" onclick="DeleteUser('.$sv['id'].')">Xóa</button></td>
 		</tr>';
 }
 ?>
@@ -63,14 +53,8 @@ foreach ($list_student as $sv) {
 <?php
 if (isset($_GET['id'])) {
 	$id          = $_GET['id'];
-	
 	$sql = 'select * from teacher where id = '.$id;
-	$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
-	$query = mysqli_query($conn, $sql);
-	$list_teacher = [];
-	while ($row = mysqli_fetch_array($query, 1)) {
-		$list_teacher[] = $row;
-	}
+	$list_teacher = execute_result($sql);
 	if ($list_teacher!= null && count($list_teacher) > 0) {
 		$gv = $list_teacher[0];
 	}
@@ -83,9 +67,9 @@ echo '<button class="button button1" onclick=\'window.open("message_box.php?user
 
 <!-- ham xoa sinh vien -->
 <script type="text/javascript">
-		function xoa_sv(id) {
+		function DeleteUser(id) {
 			if(confirm('Xác nhận xóa?')) {
-				$.post('delete.php', {'id': id},
+				$.post('delete_user.php', {'id': id},
 				function(data) {location.reload()})
 			}	
 		}

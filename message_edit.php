@@ -1,4 +1,4 @@
-<?php require_once 'utils.php';
+<?php require_once 'db_helper.php';
 
 $s_sender = $s_receiver = $s_content = '';
 

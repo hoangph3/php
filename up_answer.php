@@ -11,7 +11,7 @@
     <input type="file" name="fileUpload" value="">
     <input type="submit" name="up" value="Upload">
 </form>
-<?php require_once 'utils.php';
+<?php require_once 'db_helper.php';
 
 $id = '';
 if (isset($_POST['up']) && isset($_FILES['fileUpload']) && isset($_GET['id'])) {

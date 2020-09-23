@@ -1,4 +1,4 @@
-<?php require_once 'utils.php';
+<?php require_once 'db_helper.php';
 
 $id = '';
 if (isset($_GET['id'])) {
@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
         <h4 class="text-light">Email : <?= $s_email; ?></h4>
         <h4 class="text-light">SDT: <?= $s_phone; ?></h4>
         <?php echo 
-        '<td><button class="btn" onclick=\'window.open("message.php?id='.$sv['id'].'","_self")\'>Gửi email</button></td>' ?>
+        '<td><button class="btn" onclick=\'window.open("message_send.php?id='.$sv['id'].'","_self")\'>Gửi email</button></td>' ?>
       </div>      
     </div>
 </body>

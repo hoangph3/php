@@ -6,7 +6,7 @@
 	<h1>Nhập thông tin ban đầu</h1>
 </head>
 <body>
-<?php require_once 'utils.php';
+<?php require_once 'db_helper.php';
 session_start();
  
 //Xử lý đăng nhập
