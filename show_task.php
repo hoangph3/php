@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
 }
 else {
 	
-	echo '<br/><button class="button button2" onclick=\'window.open("up_answer.php?id='.$sv['id'].'","_self")\'>Xem bài làm của sinh viên</button>';
+	echo '<br/><button class="button button2" onclick=\'window.open("show_answer.php","_self")\'>Xem bài làm của sinh viên</button>';
 	
 	foreach($files as $file){
 		echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>
