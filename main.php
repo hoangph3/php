@@ -11,14 +11,13 @@
 		<h2 style="float: left;">Danh sách sinh viên</h2>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>
 	</div>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	
 	<!-- jQuery library -->
 	<script src="lib/jquery.min.js"></script>
 	<!-- Popper JS -->
 	<script src="lib/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">

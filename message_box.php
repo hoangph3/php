@@ -10,11 +10,11 @@
 		<h1 style="float: left;">Tin nhắn đã gửi</h1>
 	</div>
 	<!-- js de viet ham script-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="lib/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="lib/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">
@@ -76,16 +76,8 @@ if (isset($_GET['username'])) {
 <head>
 	<title>Hộp thư</title>
 	<div>
-		<h1 style="float: left;">Tin nhắn đã gửi</h1>
+		<h1 style="float: left;">Tin nhắn đã nhận</h1>
 	</div>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="lib/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="lib/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="lib/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">
@@ -107,7 +99,7 @@ if (isset($_GET['username'])) {
     $s_username = $_GET['username']; //ten de trich xuat table
 
     //lay thong tin tu db
-	$sql = "select * from message where sender = '$s_username' "; 
+	$sql = "select * from message where receiver = '$s_username' "; 
     $list_msg = execute_result($sql);
     
 	foreach ($list_msg as $msg) {
@@ -116,8 +108,6 @@ if (isset($_GET['username'])) {
 				<td>'.$msg['receiver'].'</td>
 				<td>'.$msg['content'].'</td>
 				<td>'.$msg['time'].'</td>
-				<td><button class="button button2" onclick=\'window.open("message_edit.php?id='.$msg['id'].'","_self")\'>Sửa</button></td>
-				<td><button class="button button3" onclick="xoa_msg('.$msg['id'].')">Xóa</button></td>
 			</tr>';
 	}
 ?>

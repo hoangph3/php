@@ -24,13 +24,13 @@ if (isset($_GET['id'])) {
 <head>
   <title>Thông tin chi tiết</title>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
   <!-- jQuery library -->
   <script src="lib/jquery.min.js"></script>
   <!-- Popper JS -->
   <script src="lib/popper.min.js"></script>
   <!-- Latest compiled JavaScript -->
-  <script src="lib/bootstrap.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
