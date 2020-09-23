@@ -10,12 +10,18 @@
 		<thead>
 			<tr>
 				<th width=1150>Bài tập</th>
-				<th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
 
 <?php require_once 'utils.php';
+
+//hien thi danh sach bai tap
+$dir = "./uploads";
+
+$all_files = scandir($dir);
+$files = array_diff($all_files, array('.', '..')); 
 
 //lay id trong url
 if (isset($_GET['id'])) {
@@ -27,16 +33,26 @@ if (isset($_GET['id'])) {
 	if ($list_student!= null && count($list_student) > 0) {
 		$sv = $list_student[0];
 	}
+	foreach($files as $file){
+		echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>"
+		 .'<td><button class="button button1" onclick=\'window.open("up_answer.php?id='.$sv['id'].'","_self")\'>Nộp bài</button></td>
+		 </tr>';
+			
+	}
+}
+else {
+	
+	echo '<br/><button class="button button2" onclick=\'window.open("up_answer.php?id='.$sv['id'].'","_self")\'>Xem bài làm của sinh viên</button>';
+	
+	foreach($files as $file){
+		echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>
+		</tr>";
+	}
+	
 }
 
-//hien thi danh sach bai tap
-$dir = "./uploads";
-
-$all_files = scandir($dir);
-$files = array_diff($all_files, array('.', '..')); 
-
-foreach($files as $file){
-	echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>"
-	 .'<td><button class="button button2" onclick=\'window.open("up_answer.php?id='.$sv['id'].'","_self")\'>Nộp bài</button></td>';
-		
-}
+?>
+		</tbody>
+	</table>
+<body>
+</html>

@@ -1,6 +1,9 @@
 <?php
 if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
-    if ($_FILES['fileUpload']['error'] > 0)
+    if (!file_exists($_FILES['fileUpload']['name'])){
+        echo "<div><h2 style='margin-left:2;color:red;'> File đã tồn tại, hãy đổi tên file !</h2></div>";
+    }
+    else if ($_FILES['fileUpload']['error'] > 0)
         echo "<div><h2 style='margin-left:2;color:red;'> Đã có lỗi, vui lòng thử lại !</h2></div>";
     else {
         move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/' . $_FILES['fileUpload']['name']);
