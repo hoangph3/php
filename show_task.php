@@ -10,7 +10,6 @@
 		<thead>
 			<tr>
 				<th width=1150>Bài tập</th>
-				
 			</tr>
 		</thead>
 		<tbody>
@@ -18,7 +17,7 @@
 <?php require_once 'utils.php';
 
 //hien thi danh sach bai tap
-$dir = "./uploads";
+$dir = "./uploads/";
 
 $all_files = scandir($dir);
 $files = array_diff($all_files, array('.', '..')); 
