@@ -145,3 +145,13 @@ input[type=file] {
     border-radius: 8px; 
 }
 
+
+#outer
+{
+    width:100%;
+    text-align: left;
+}
+.inner
+{
+    display: inline-block;
+}

@@ -83,12 +83,10 @@ if (isset($_GET['username'])) {
 	<table class="styled-table">
 		<thead>
 			<tr>
-				<th>Người gửi</th>
-				<th>Người nhận</th>
-				<th width=600>Nội dung</th>
-				<th width=200>Thời gian</th>
-				<th width=10></th>
-				<th width=10></th>
+				<th width=115>Người gửi</th>
+				<th width=115>Người nhận</th>
+				<th width=550>Nội dung</th>
+				<th width=300>Thời gian</th>
 			</tr>
 		</thead>
 		<tbody>

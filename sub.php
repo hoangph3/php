@@ -72,13 +72,15 @@ if (isset($_GET['id'])) {
 	if ($list_student!= null && count($list_student) > 0) {
 		$sv = $list_student[0];
 	}
-}
-echo '<button class="button button1" onclick=\'window.open("message_box.php?username='.$sv['username'].'","_self")\'>Xem hộp thư</button><br/><br/>';//phai la username
+} ?>
+<div id="outer">
+<?php
+echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("message_box.php?username='.$sv['username'].'","_self")\'>Xem hộp thư</button></div>';//phai la username
 
-
-echo '<button class="button button1" onclick=\'window.open("show_task.php?id='.$sv['id'].'","_self")\'>Xem bài tập</button><br/><br/>'; //id cung dc 
-echo '<button class="button button1" onclick=\'window.open("solve_task.php?id='.$sv['id'].'","_self")\'>Giải bài tập</button>';
-
+echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("show_task.php?id='.$sv['id'].'","_self")\'>Xem bài tập</button></div>'; //id la dc
+echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("solve_task.php?id='.$sv['id'].'","_self")\'>Giải bài tập</button></div>
+</div>
+';
 ?>
 </body>
 </html>
