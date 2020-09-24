@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <style>
-	<?php require 'index.css'; ?>
+	<?php require 'css/index.css'; ?>
 </style>
 <html>
 <head>
