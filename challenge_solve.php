@@ -16,6 +16,9 @@
     </div>
 </form>
 <?php require_once 'utils.php';
+if (isset($_POST['submit'])){
+    $answer = $_POST['answer'];
+} 
 
 
 
