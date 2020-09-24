@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<?php 
+<?php require_once 'utils.php';
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     echo '<h1>Challenge của bạn</h1>'; 
@@ -35,9 +36,12 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
     }
     else {
         move_uploaded_file($_FILES['fileUpload']['tmp_name'], './admin/challenge/' . $_FILES['fileUpload']['name']);
-        echo "Upload thành công <br/>";
         $suggest = $_POST['suggest'];
     }
+}
+$sql = "insert into challenge(suggest) value('$suggest')";
+if ($suggest != '') {
+    execute($sql);
 }
 ?>
 <table class="styled-table">
@@ -49,10 +53,14 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
 		</thead>
 		<tbody>
 <?php 
+$sql = "select * from challenge";
+$list_suggest = execute_result($sql);
+foreach ($list_suggest as $idea) {
 echo '<tr>
-            <td>'.$suggest.'</td>
+            <td>'.$idea['suggest'].'</td>
             <td><button class="button button2" onclick=\'window.open("challenge_solve.php?id='.$id.'","_self")\'>Solve</button></td>
         </tr>';
+}
 ?> 
         </tbody>
 </body>
