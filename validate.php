@@ -12,7 +12,7 @@ session_start();
 //Xử lý đăng nhập
 if (isset($_POST['dangnhap'])) 
 {
-    $connect = mysqli_connect("127.0.0.1", "root", "", "dbsinhvien");
+	$conn = mysqli_connect('localhost','id14948603_root','Hoangmit28062017@','id14948603_dbsinhvien');
 
 	// ktra connect
 	if (!$connect) {

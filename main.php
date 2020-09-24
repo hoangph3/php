@@ -36,8 +36,7 @@
 		<tbody>
 
 <?php
-
-$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
+$conn = mysqli_connect('localhost','id14948603_root','Hoangmit28062017@','id14948603_dbsinhvien');
 $sql = 'select * from student';
 $query = mysqli_query($conn, $sql);
 $list_student = [];
@@ -65,7 +64,7 @@ if (isset($_GET['id'])) {
 	$id          = $_GET['id'];
 	
 	$sql = 'select * from teacher where id = '.$id;
-	$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
+	$conn = mysqli_connect('localhost','id14948603_root','Hoangmit28062017@','id14948603_dbsinhvien');
 	$query = mysqli_query($conn, $sql);
 	$list_teacher = [];
 	while ($row = mysqli_fetch_array($query, 1)) {
