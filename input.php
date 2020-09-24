@@ -1,4 +1,5 @@
-<?php $conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
+<?php 
+$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
 
 $s_username = $s_userpwd = $s_fullname = $s_email = $s_phone = '';
 
