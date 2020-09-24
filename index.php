@@ -6,33 +6,44 @@
 	<h1>Đăng nhập tài khoản</h1>
 </head>
 <body>
-<?php require_once 'db_helper.php';
+<?php require_once 'utils.php';
 session_start();
-if (isset($_POST['login'])) 
+ 
+//Xử lý đăng nhập
+if (isset($_POST['dangnhap'])) 
 {
-    $conn = mysqli_connect("127.0.0.1", "root", "", "dbsinhvien");
-    $username = addslashes($_POST['username']);
-    $userpwd = addslashes($_POST['userpwd']);
-     
-	$sql = "select * from teacher where username = '$username' and userpwd = '$userpwd' ";
-	$query = mysqli_query($conn, $sql);
-	$teacher = mysqli_fetch_array($query);
-	
-	$sql = "select * from student where username = '$username' and userpwd = '$userpwd' ";
-	$query = mysqli_query($conn, $sql);
-	$student = mysqli_fetch_array($query);
-     
-    if (($teacher['username'] == $username) && ($teacher['userpwd'] == $userpwd)){
-        $_SESSION['username'] = $teacher['username'];
-		$_SESSION['userpwd'] = $teacher['userpwd'];
+    $connect = mysqli_connect("127.0.0.1", "root", "", "dbsinhvien");
 
-		header("location: "."main.php?id=".$teacher['id']);
+	// ktra connect
+	if (!$connect) {
+	    die("Connection failed: " . mysqli_connect_error());
 	}
-	else if(($student['username'] == $username) && ($student['userpwd'] == $userpwd)){
-        $_SESSION['username'] = $student['username'];
-		$_SESSION['userpwd'] = $student['userpwd'];
+
+    //Lấy dữ liệu nhập vào tu input
+    $s_username = addslashes($_POST['username']);
+    $s_userpwd = addslashes($_POST['userpwd']);
+     
+	//kiem tra thong tin giao vien
+	$sql_teacher = "select * from teacher where username = '$s_username' and userpwd = '$s_userpwd' ";
+	$query_teacher = mysqli_query($connect, $sql_teacher);
+	$row_teacher = mysqli_fetch_array($query_teacher);
+	
+	//kiem tra thong tin sinh vien
+	$sql_student = "select * from student where username = '$s_username' and userpwd = '$s_userpwd' ";
+	$query_student = mysqli_query($connect, $sql_student);
+	$row_student = mysqli_fetch_array($query_student);
+     
+    if (($row_teacher['username'] == $s_username) && ($row_teacher['userpwd'] == $s_userpwd)){
+        $_SESSION['username'] = $row_teacher['username'];
+		$_SESSION['userpwd'] = $row_teacher['userpwd'];
+
+		header("location: "."main.php?id=".$row_teacher['id']);
+	}
+	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
+        $_SESSION['username'] = $row_student['username'];
+		$_SESSION['userpwd'] = $row_student['userpwd'];
 		
-		header("location: "."sub.php?id=".$student['id']);
+		header("location: "."sub.php?id=".$row_student['id']);
 		die();
 	}
 	else {
@@ -50,7 +61,7 @@ if (isset($_POST['login']))
 			<input required="true" type="password" class="form-control" id="userpwd" name="userpwd">
 		</div>
 		<div class="input-group">
-                <input type="submit" class="button buton1" name="login" value="Đăng nhập"/>
+                <input type="submit" class="button buton1" name="dangnhap" value="Đăng nhập"/>
 		</div>
 	</form>
 </body>

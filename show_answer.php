@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="index.css">
+<style>
+    <?php require 'index.css'; ?>
+</style>
 <html>
 <head>
 	<title>Bài làm của sinh viên</title>
@@ -26,7 +28,7 @@
 		</thead>
 		<tbody>
 
-<?php require_once 'db_helper.php';
+<?php require_once 'utils.php';
 
 $dir = "/admin/answer/";
 

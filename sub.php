@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="index.css">
+<style>
+	<?php require 'index.css'; ?>
+</style>
 <html>
 <head>
 	<title>Phòng đào tạo</title>
 	<div>
 		<h1 style="float: left;">Danh sách sinh viên</h1>
-		<button class="button" onclick="window.open('validate.php', '_self')">Sửa thông tin</button>
+		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('validate.php', '_self')">Sửa thông tin</button>
 	</div>
 	
 	<!-- jQuery library -->
@@ -74,7 +76,11 @@ if (isset($_GET['id'])) {
 <div id="outer">
 <?php
 echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("message_box.php?username='.$sv['username'].'","_self")\'>Xem hộp thư</button></div>';
+//phai la username
+
 echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("show_task.php?id='.$sv['id'].'","_self")\'>Xem bài tập</button></div>'; 
+//id la dc
+//echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("solve_task.php?id='.$sv['id'].'","_self")\'>Giải bài tập</button></div>';
 ?>
 </div>
 </body>

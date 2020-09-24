@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="index.css">
-<?php require_once 'db_helper.php'; ?>
+<style>
+    <?php require 'index.css'; ?>
+    <?php require_once 'utils.php'; ?>
+</style>
 <html>
 <head>
 	<title>Hộp thư</title>
