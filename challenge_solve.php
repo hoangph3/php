@@ -17,11 +17,20 @@
 </form>
 <?php require_once 'utils.php';
 if (isset($_POST['submit'])){
-    $answer = $_POST['answer'];
-} 
-
-
-
+    $answer = $_POST['answer'].'.txt';
+    $dir = './admin/challenge/';
+    $filename = $dir . $answer;
+    
+    if (file_exists($filename)){
+        echo 'Chúc mừng! Đáp án đúng rồi!';
+        $myfile = fopen($filename,"r") or die("File không mở được!");
+        echo fread($myfile, filesize($filename));
+        fclose($myfile);
+    }
+    else {
+        echo 'Đáp án không đúng!';
+    }
+}
 ?>
 </body>
 </html>
