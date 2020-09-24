@@ -76,6 +76,8 @@ if (isset($_GET['id'])) {
 	}
 }
 echo '<button class="button button1" onclick=\'window.open("message_box.php?username='.$gv['username'].'","_self")\'>Xem hộp thư</button>';
+echo '<button style="float: right; position: relative; top: 23px; right: 15px;" class="button button2" 
+onclick=\'window.open("challenge.php","_self")\'>Challenge</button>';
 ?>
 
 </body>

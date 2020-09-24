@@ -80,7 +80,8 @@ echo '<div class="inner"><button style="margin:5px;" class="button button1" oncl
 
 echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("show_task.php?id='.$sv['id'].'","_self")\'>Xem bài tập</button></div>'; 
 //id la dc
-//echo '<div class="inner"><button style="margin:5px;" class="button button1" onclick=\'window.open("solve_task.php?id='.$sv['id'].'","_self")\'>Giải bài tập</button></div>';
+echo '<button style="float: right; position: relative; top: 23px; right: 15px;" class="button button2" 
+onclick=\'window.open("challenge.php?id='.$sv['id'].'","_self")\'>Challenge</button>';
 ?>
 </div>
 </body>
