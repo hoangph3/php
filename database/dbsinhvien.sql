@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th9 24, 2020 lúc 04:23 AM
+-- Thời gian đã tạo: Th9 24, 2020 lúc 08:33 AM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.4.10
 
@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `challenge`
+--
+
+CREATE TABLE `challenge` (
+  `id` int(10) NOT NULL,
+  `suggest` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `challenge`
+--
+
+INSERT INTO `challenge` (`id`, `suggest`) VALUES
+(11, 'bai tho cua to huu');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `homework`
 --
 
@@ -39,7 +57,8 @@ CREATE TABLE `homework` (
 --
 
 INSERT INTO `homework` (`id`, `username`, `filename`, `time`) VALUES
-(77, 'hoang', 'Challenge-5a.docx', '2020-09-24 09:19:31');
+(77, 'hoang', 'Challenge-5a.docx', '2020-09-24 09:19:31'),
+(78, 'hoang', 'bt.txt', '2020-09-24 10:04:44');
 
 -- --------------------------------------------------------
 
@@ -109,6 +128,12 @@ INSERT INTO `teacher` (`id`, `username`, `userpwd`) VALUES
 --
 
 --
+-- Chỉ mục cho bảng `challenge`
+--
+ALTER TABLE `challenge`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `homework`
 --
 ALTER TABLE `homework`
@@ -137,10 +162,16 @@ ALTER TABLE `teacher`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `challenge`
+--
+ALTER TABLE `challenge`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT cho bảng `homework`
 --
 ALTER TABLE `homework`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT cho bảng `message`
