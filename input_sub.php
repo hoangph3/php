@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
 } ?>
 
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <head>
 	<title>Cập nhật thông tin</title>

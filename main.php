@@ -11,13 +11,9 @@
 		<h2 style="float: left;">Danh sách sinh viên</h2>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('input.php', '_self')">Thêm sinh viên</button>
 	</div>
-	
-	<!-- jQuery library -->
-	<script src="lib/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="lib/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">
@@ -36,15 +32,8 @@
 		<tbody>
 
 <?php
-
-$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
 $sql = 'select * from student';
-$query = mysqli_query($conn, $sql);
-$list_student = [];
-while ($row = mysqli_fetch_array($query, 1)) {
-	$list_student[] = $row;
-}
-
+$list_student = execute_result($sql);
 foreach ($list_student as $sv) {
 	echo '<tr>
 			<td>'.$sv['username'].'</td>
@@ -63,7 +52,6 @@ foreach ($list_student as $sv) {
 <?php
 if (isset($_GET['id'])) {
 	$id          = $_GET['id'];
-	
 	$sql = 'select * from teacher where id = '.$id;
 	$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
 	$query = mysqli_query($conn, $sql);

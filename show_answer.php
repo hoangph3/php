@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<style>
-    <?php require 'index.css'; ?>
-</style>
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <head>
 	<title>Bài làm của sinh viên</title>
 	<div>	
 		<h2 style='margin-left:450px;'>Danh sách bài tập đã nộp</h2>
 	</div>
-	
-	<!-- jQuery library -->
-	<script src="lib/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="lib/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">

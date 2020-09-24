@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<style>
-	<?php require 'index.css'; ?>
-</style>
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <html>
 <head>
 	<title>Phòng đào tạo</title>
@@ -9,13 +7,6 @@
 		<h1 style="float: left;">Danh sách sinh viên</h1>
 		<button class="button" style="float: right; position: relative; top: 23px; right: 15px;" onclick="window.open('validate.php', '_self')">Sửa thông tin</button>
 	</div>
-	
-	<!-- jQuery library -->
-	<script src="lib/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="lib/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">

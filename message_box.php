@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<style>
-    <?php require 'index.css'; ?>
-    <?php require_once 'utils.php'; ?>
-</style>
+<link rel="stylesheet" type="text/css" href="css/index.css"> 
 <html>
 <head>
 	<title>Hộp thư</title>
 	<div>
 		<h1 style="float: left;">Tin nhắn đã gửi</h1>
 	</div>
-	<!-- js de viet ham script-->
-	<script src="lib/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="lib/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 	<table class="styled-table">
@@ -30,7 +24,7 @@
 		</thead>
 		<tbody>
 
-<?php
+<?php require_once 'utils.php'; 
 if (isset($_GET['username'])) {
     
     $s_username = $_GET['username']; //ten de trich xuat table
