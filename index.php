@@ -2,8 +2,7 @@
 session_start();
 if (isset($_POST['dangnhap'])) 
 {
-    $connect = mysqli_connect("127.0.0.1", "root", "", "dbsinhvien");
-
+    $connect = connect_db();
     $s_username = addslashes($_POST['username']);
     $s_userpwd = addslashes($_POST['userpwd']);
      
@@ -40,7 +39,7 @@ if (isset($_POST['dangnhap']))
     </head>
     <body>
         <header>
-            <img src="/css/logo.png" width="64px" height="64px">
+            <img src="/css/hack.png" width="64px" height="64px">
             <h1>Sign in to VCS</h1>
         </header>
         <form method="post" action="index.php">

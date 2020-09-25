@@ -12,19 +12,15 @@
     <input type="submit" name="up" value="Upload">
 </form>
 <?php require_once 'utils.php';
-
 $id = '';
 if (isset($_POST['up']) && isset($_FILES['fileUpload']) && isset($_GET['id'])) {
     $id          = $_GET['id'];
-	$sql         = 'select * from student where id = '.$id; // . = noi chuoi
-	
+	$sql         = 'select * from student where id = '.$id;
 	$list_student = execute_result($sql);
-	
 	if ($list_student != null && count($list_student) > 0) {
 		$sv        = $list_student[0];
         $s_username = $sv['username'];
     }
-        
     if ($_FILES['fileUpload']['error'] > 0) {
         echo "Upload không thành công <br/>";
         echo '<a style="font-size:30;" href="./up_answer.php?id='.$id.'">Đăng lại</a><br/>';

@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
 
 <ul>
   <li><a href= <?php echo "page_user.php?id=" .$id ?>>Home</a></li>
-  <li><a href=<?php echo "input_sub.php?id=" .$id ?>>Change info</a></li>
+  <li><a href=<?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
   <li><a href= <?php echo "message_box.php?username=" .$sv['username']?> >Mailbox</a></li>
   <li><a href= "" >Challenge</a></li>
   <div class="navbar">
@@ -84,7 +84,8 @@ foreach ($list_student as $sv) {
       <table class="styled-table">
       <thead>
           <tr>
-              <th width=100%>Task</th>
+              <th>Task</th>
+              <th width="200"></th>
           </tr>
       </thead>
       <tbody>
@@ -93,19 +94,19 @@ $dir = "./uploads/";
 $all_files = scandir($dir);
 $files = array_diff($all_files, array('.', '..')); 
 foreach($files as $file){
-  echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>
-  </tr>";
+  echo "<tr>
+          <td><a href='download.php?file=".$file."'>".$file."</a></td>".
+        '<td><button style = "padding: 14px;" class="w3-btn w3-white w3-border w3-border-teal w3-round-large" onclick=\'window.open("up_answer?id='.$sv['id'].'","_self")\'>Solve</button></td>'  
+       .'</tr>';
 }
 ?>
       </tbody>
 	    </table>
-    
   </div>
 </div>
-
+</body>
+</html>
 <div class="footer">
   <h2>Contact me</h2>
   <p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
 </div>
-</body>
-</html>

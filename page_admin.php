@@ -29,22 +29,16 @@ if (isset($_GET['id'])) {
 
 <ul>
   <li><a href= <?php echo "page_admin.php?id=" .$id ?>>Home</a></li>
-  <li><a href="input.php">Student</a></li>
+  <li><a href= <?php echo "add_edit_student.php?id=" .$id ?>>Add Student</a></li>
   <li><a href= <?php echo "message_box.php?username=" .$gv['username']?> >Mailbox</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Assignment</a>
     <div class="dropdown-content">
-      <a href="up_task.php">Post assignment</a>
-      <a href="show_answer.php">Show submission</a>
+      <a href= <?php echo "up_task.php?id=" .$id ?>>Create</a>
+      <a href= <?php echo "show_answer.php?id=" .$id ?>>Show Submission</a>
     </div>
   </li>
-  <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Challenge</a>
-    <div class="dropdown-content">
-      <a href="#">Post challenge</a>
-      <a href="#">Show challenge</a>
-    </div>
-  </li>
+  <li><a href= <?php echo "challenge.php?id=" .$id ?>>Challenge</a></li>
   <div class="navbar">
     <a href="index.php" class="right">Log out</a>
   </div>
