@@ -29,9 +29,9 @@ if (isset($_GET['id'])) {
 
 <ul>
   <li><a href= <?php echo "page_user.php?id=" .$id ?>>Home</a></li>
-  <li><a href=<?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
+  <li><a href= <?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
   <li><a href= <?php echo "message_box.php?username=" .$sv['username']?> >Mailbox</a></li>
-  <li><a href= "" >Challenge</a></li>
+  <li><a href=  <?php echo "challenge.php?id=" .$id ?> >Challenge</a></li>
   <div class="navbar">
     <a href="index.php" class="right">Log out</a>
   </div>
@@ -63,14 +63,14 @@ foreach ($list_student as $sv) {
         echo '<tr>
                 <td>'.$sv['username'].'</td>
                 <td>'.$sv['fullname'].'</td>
-				<td width="10">
-				<div class="dropdown" >
+				        <td width="10">
+				        <div class="dropdown" >
                 <button class="dropbtn w3-white w3-border w3-border-indigo w3-round-large">Detail</button>
                   <div class="dropdown-content">
                   <p style="font-weight: bold;">*Password: '.$sv['userpwd'].'</p>'.
-                  '<p style="font-weight: bold;">*Email: '.'******'.'</p>'.
+                  '<p style="font-weight: bold;">*Email: '.$sv['email'].'</p>'.
                   '<p style="font-weight: bold;">*Phone: '.$sv['phone'].'</p>'.
-                  '<a style="font-weight: bold; color: #ff5555;" href='.'message.php?id='.$sv['id'].'>Sendmail'.'</a>'.
+                  '<a style="font-weight: bold; color: #ff5555;" href='.'message.php?id='.$sv['id'].'>Send message'.'</a>'.
                 '</div>  
                 </div>
 				</td>
@@ -96,7 +96,7 @@ $files = array_diff($all_files, array('.', '..'));
 foreach($files as $file){
   echo "<tr>
           <td><a href='download.php?file=".$file."'>".$file."</a></td>".
-        '<td><button style = "padding: 14px;" class="w3-btn w3-white w3-border w3-border-teal w3-round-large" onclick=\'window.open("up_answer?id='.$sv['id'].'","_self")\'>Solve</button></td>'  
+        '<td><button style = "padding: 14px;" class="w3-btn w3-white w3-border w3-border-teal w3-round-large" onclick=\'window.open("up_answer.php?id='.$sv['id'].'","_self")\'>Solve</button></td>'  
        .'</tr>';
 }
 ?>

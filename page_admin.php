@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
       <a href= <?php echo "show_answer.php?id=" .$id ?>>Show Submission</a>
     </div>
   </li>
-  <li><a href= <?php echo "challenge.php?id=" .$id ?>>Challenge</a></li>
+  <li><a href="challenge.php">Challenge</a></li>
   <div class="navbar">
     <a href="index.php" class="right">Log out</a>
   </div>
