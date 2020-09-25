@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 
 	$s_id = addslashes(isset($_POST['id']) ? $_POST['id'] : '');
 
-	if ($s_id != '') { //sua tin nhan
+	if ($s_id != '') {
 		$sql = "update message set content = '$s_content', time = NOW() where id = " .$s_id;
 	}
 	

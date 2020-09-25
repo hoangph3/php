@@ -7,42 +7,37 @@
 </head>
 <body>
 <?php require_once 'utils.php';
-
-//Xử lý đăng nhập
 if (isset($_POST['message'])) 
 {
-    //Lấy dữ liệu nhập vào tu input
-    $s_sender = addslashes($_POST['sender']);
+	if(isset($_GET['id']))
+	
 	$s_senderpwd = addslashes($_POST['senderpwd']);
 
 	$s_receiver = addslashes($_POST['receiver']);
     $s_content = $_POST['content'];
 	 
-	//truy xuat thong tin nguoi gui
 	$sql_teacher = "select * from teacher WHERE username = '$s_sender' and userpwd = '$s_senderpwd' ";
 	$row_teacher = execute_result($sql_teacher);
 	$list_teacher = $row_teacher[0];
-	$user_teacher = $list_teacher['username']; //tdn cua teacher
+	$user_teacher = $list_teacher['username'];
 
 	$sql_student = "select * from student WHERE username = '$s_sender' and userpwd = '$s_senderpwd' ";
 	$row_student = execute_result($sql_student);
 	$list_student = $row_student[0];
-	$user_student = $list_student['username']; //tdn cua student
+	$user_student = $list_student['username']; 
 		
 	if (!empty($user_student))
 	{
 		$sql = "insert into message(sender, receiver, content, time) 
 		value ('$user_student', '$s_receiver', '$s_content', NOW())";
 		execute($sql); 
-		//echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
-		header("location: sub.php?id=".$list_student['id']);		
+		header("location: page_sub.php?id=".$list_student['id']);		
 	}	
 	else if (!empty($user_teacher)){
 		$sql = "insert into message(sender, receiver, content, time) 
 		value ('$user_teacher', '$s_receiver', '$s_content', NOW())";
 		execute($sql); 
-		//echo '<div><h3>Gửi tin nhắn thành công!</h3></div>';
-		header("location: main.php?id=".$list_teacher['id']);
+		header("location: page_main.php?id=".$list_teacher['id']);
 	}
 	else {
 		echo '<div><h3>Kiểm tra lại thông tin người gửi!</h3></div>';

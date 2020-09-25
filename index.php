@@ -19,13 +19,13 @@ if (isset($_POST['dangnhap']))
         $_SESSION['username'] = $row_teacher['username'];
 		$_SESSION['userpwd'] = $row_teacher['userpwd'];
 
-		header("location: "."main.php?id=".$row_teacher['id']);
+		header("location: "."page_admin.php?id=".$row_teacher['id']);
 	}
 	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
         $_SESSION['username'] = $row_student['username'];
 		$_SESSION['userpwd'] = $row_student['userpwd'];
 		
-		header("location: "."sub.php?id=".$row_student['id']);
+		header("location: "."page_user.php?id=".$row_student['id']);
 		die();
 	}
 	else {

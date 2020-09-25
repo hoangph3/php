@@ -1,10 +1,8 @@
-<?php 
-$conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
-
+<?php require_once 'utils.php';
 $s_username = $s_userpwd = $s_fullname = $s_email = $s_phone = '';
 
 if (!empty($_POST)) {
-	//xac thuc data va injection
+
 	$s_id = '';
 	$s_username = addslashes(isset($_POST['username']) ? $_POST['username'] : '');
 	$s_userpwd = addslashes(isset($_POST['userpwd']) ? $_POST['userpwd'] : '');
@@ -21,20 +19,14 @@ if (!empty($_POST)) {
 		value ('$s_username', '$s_userpwd', '$s_fullname', '$s_email', '$s_phone')"; //tao sv moi
 	}
 	mysqli_query($conn, $sql);
-
-	header('Location: main.php');
+	header('Location: page_admin.php');
 	die();
 }
-
 $id = '';
 if (isset($_GET['id'])) {
 	$id          = $_GET['id'];
-	$sql         = 'select * from student where id = '.$id; // . = noi chuoi
-	$query = mysqli_query($conn, $sql);
-	$list_student = [];
-	while ($row = mysqli_fetch_array($query, 1)) {
-		$list_student[] = $row;
-	}
+	$sql         = 'select * from student where id = '.$id; 
+	$list_student = execute_result($sql) ;
 	if ($list_student != null && count($list_student) > 0) {
 		$sv        = $list_student[0];
 		$s_username = $sv['username'];
@@ -46,7 +38,6 @@ if (isset($_GET['id'])) {
 		$id = '';
 	}
 } ?>
-
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <html>

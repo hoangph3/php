@@ -107,6 +107,3 @@ if (isset($_GET['username'])) {
 	</table>
 </html>
 <?php } 
-
-
-
