@@ -15,11 +15,13 @@ function execute_result($sql) {
 	mysqli_close($conn);
 	return $result;
 }
-function connect_db()
-{
-    global $conn;
-    if (!$conn){
-        $conn = mysqli_connect('127.0.0.1','root','','dbsinhvien') or die ('Exit!');
-	}
+
+function connect_db() {
+    $conn = mysqli_connect('127.0.0.1','root','','dbsinhvien') or die ('Exit!');
 	return $conn;
+}
+
+function close_db() {
+    $conn = mysqli_connect('127.0.0.1','root','','dbsinhvien');
+	mysqli_close($conn);
 }

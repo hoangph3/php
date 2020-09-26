@@ -1,38 +1,59 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="css/index.css"> 
-<html>
+<html lang="en">
 <head>
-	<title>Hộp thư</title>
-	<div>
-		<h1 style="float: left;">Tin nhắn đã gửi</h1>
-	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+<title>Message Box</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<table class="styled-table">
-		<thead>
-			<tr>
-				<th>Người gửi</th>
-				<th>Người nhận</th>
-				<th width=600>Nội dung</th>
-				<th width=200>Thời gian</th>
+
+<div class="header">
+  <h1>Viettel Cyber Security</h1>
+  <p>BigData and Machine Learning</p>
+</div>
+
+<ul>
+  <li><a href= <?php echo "page_user.php?id=" .$id ?>>Home</a></li>
+  <li><a href= <?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
+  <li><a href= <?php echo "message_box.php?username=" .$sv['username']?> >Mailbox</a></li>
+  <li><a href=  <?php echo "challenge.php?id=" .$id ?> >Challenge</a></li>
+  <div class="navbar">
+    <a href="index.php" class="right">Log out</a>
+  </div>
+</ul>
+
+<div class="row">
+  <div class="side">
+    <h2>About Me</h2>
+    <h5>Photo of me:</h5>
+    <img src="/css/hack.png" width="200px" height="200px">
+    <p>While hack we dev - While dev we hack</p>
+  </div>
+  <div class="main">
+    <h2>Sent</h2>
+        <table class="styled-table">
+        <thead>
+            <tr>
+				<th>From</th>
+				<th>To</th>
+				<th width=600>Content</th>
+				<th width=200>Time</th>
 				<th width=10></th>
 				<th width=10></th>
-			</tr>
-		</thead>
-		<tbody>
+            </tr>
+        </thead>
+        <tbody>
 
 <?php require_once 'utils.php'; 
 if (isset($_GET['username'])) {
-    
-    $s_username = $_GET['username']; //ten de trich xuat table
-
-    //lay thong tin tu db
+    $s_username = $_GET['username']; 
 	$sql = "select * from message where sender = '$s_username' "; 
     $list_msg = execute_result($sql);
-    
 	foreach ($list_msg as $msg) {
 		echo '<tr>
 				<td>'.$msg['sender'].'</td>
@@ -43,54 +64,26 @@ if (isset($_GET['username'])) {
 				<td><button class="button button3" onclick="xoa_msg('.$msg['id'].')">Xóa</button></td>
 			</tr>';
 	}
+}
 ?>
-		</tbody>
-	</table>
-</html>
-
-
-<!-- ham xoa tin nhan -->
-<script type="text/javascript">
-		function xoa_msg(id) {
-			if(confirm('Xác nhận xóa?')) {
-				$.post('message_delete.php', {'id': id},
-				function(data) {location.reload()})
-			}	
-		}
-</script>
-<?php }
-?>
-
-<!DOCTYPE html>
-<style>
-    <?php require 'index.css'; ?>
-    <?php require_once 'utils.php'; ?>
-</style>
-<html>
-<head>
-	<title>Hộp thư</title>
-	<div>
-		<h1 style="float: left;">Tin nhắn đã nhận</h1>
-	</div>
-</head>
-<body>
-	<table class="styled-table">
+        </tbody>
+        </table>
+      <h2>Inbox</h2>
+      <table class="styled-table">
 		<thead>
 			<tr>
-				<th width=115>Người gửi</th>
-				<th width=115>Người nhận</th>
-				<th width=550>Nội dung</th>
-				<th width=300>Thời gian</th>
+				<th>From</th>
+				<th>To</th>
+				<th width=600>Content</th>
+				<th width=200>Time</th>
+				<th width=10></th>
+				<th width=10></th>
 			</tr>
 		</thead>
 		<tbody>
-
-<?php
+<?php 
 if (isset($_GET['username'])) {
-    
-    $s_username = $_GET['username']; //ten de trich xuat table
-
-    //lay thong tin tu db
+    $s_username = $_GET['username']; 
 	$sql = "select * from message where receiver = '$s_username' "; 
     $list_msg = execute_result($sql);
     
@@ -102,8 +95,25 @@ if (isset($_GET['username'])) {
 				<td>'.$msg['time'].'</td>
 			</tr>';
 	}
+}
 ?>
 		</tbody>
-	</table>
+	    </table>
+  </div>
+</div>
+</body>
 </html>
-<?php } 
+<div class="footer">
+  <h2>Contact me</h2>
+  <p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
+</div>
+
+<!-- ham xoa tin nhan -->
+<script type="text/javascript">
+		function xoa_msg(id) {
+			if(confirm('Xác nhận xóa?')) {
+				$.post('message_delete.php', {'id': id},
+				function(data) {location.reload()})
+			}	
+		}
+</script>

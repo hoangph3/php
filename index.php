@@ -16,15 +16,15 @@ if (isset($_POST['dangnhap']))
      
     if (($row_teacher['username'] == $s_username) && ($row_teacher['userpwd'] == $s_userpwd)){
         $_SESSION['username'] = $row_teacher['username'];
-		$_SESSION['userpwd'] = $row_teacher['userpwd'];
-
-		header("location: "."page_admin.php?id=".$row_teacher['id']);
+        $_SESSION['userpwd'] = $row_teacher['userpwd'];
+        $_SESSION['id'] = $row_teacher['id'];
+        header("location: "."page_admin.php?id=".$_SESSION['id']);
 	}
 	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
         $_SESSION['username'] = $row_student['username'];
-		$_SESSION['userpwd'] = $row_student['userpwd'];
-		
-		header("location: "."page_user.php?id=".$row_student['id']);
+        $_SESSION['userpwd'] = $row_student['userpwd'];
+        $_SESSION['id'] = $row_student['id'];
+		header("location: "."page_user.php?id=".$_SESSION['id']);
 		die();
 	}
 	else {

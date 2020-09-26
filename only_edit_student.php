@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
 
 <ul>
 <li><a href= <?php echo "page_user.php?id=" .$id ?>>Home</a></li>
-  <li><a href=<?php echo "input_sub.php?id=" .$id ?>>Change info</a></li>
+  <li><a href=<?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
   <li><a href= <?php echo "message_box.php?username=" .$sv['username']?> >Mailbox</a></li>
   <li><a href= "" >Challenge</a></li>
   <div class="navbar">

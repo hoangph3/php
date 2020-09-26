@@ -3,8 +3,6 @@
 $s_sender = $s_receiver = $s_content = '';
 
 if (!empty($_POST)) {
-
-	//xac thuc data va injection
 	$s_id = '';
 	$s_sender = addslashes(isset($_POST['sender']) ? $_POST['sender'] : '');
 	$s_receiver = addslashes(isset($_POST['receiver']) ? $_POST['receiver'] : '');
@@ -15,19 +13,16 @@ if (!empty($_POST)) {
 	if ($s_id != '') {
 		$sql = "update message set content = '$s_content', time = NOW() where id = " .$s_id;
 	}
-	
 	execute($sql);
 	header('Location: message_box.php?username='.$s_sender);
 	die();
 }
-
 $id = '';
 if (isset($_GET['id'])) {
 
 	$id          = $_GET['id'];
-	$sql         = 'select * from message where id = '.$id; // . = noi chuoi
+	$sql         = 'select * from message where id = '.$id;
 	$list_msg = execute_result($sql);
-	
 	if ($list_msg != null && count($list_msg) > 0) {
 		$msg       = $list_msg[0];
 		$s_sender = $msg['sender'];
