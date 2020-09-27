@@ -11,8 +11,8 @@ else {
   else {
     $page = 1;
   }
-  $num_per_page = 03;
-  $start_from = ($page - 1)*03;
+  $num_per_page = 02;
+  $start_from = ($page - 1)*02;
   
   ?>
   <!DOCTYPE html>

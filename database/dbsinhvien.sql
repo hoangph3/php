@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th9 24, 2020 lúc 08:33 AM
+-- Thời gian đã tạo: Th9 28, 2020 lúc 12:42 AM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.4.10
 
@@ -29,15 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `challenge` (
   `id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `suggest` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `challenge`
---
-
-INSERT INTO `challenge` (`id`, `suggest`) VALUES
-(11, 'bai tho cua to huu');
 
 -- --------------------------------------------------------
 
@@ -47,18 +41,11 @@ INSERT INTO `challenge` (`id`, `suggest`) VALUES
 
 CREATE TABLE `homework` (
   `id` int(11) NOT NULL,
+  `task` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `filename` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `homework`
---
-
-INSERT INTO `homework` (`id`, `username`, `filename`, `time`) VALUES
-(77, 'hoang', 'Challenge-5a.docx', '2020-09-24 09:19:31'),
-(78, 'hoang', 'bt.txt', '2020-09-24 10:04:44');
 
 -- --------------------------------------------------------
 
@@ -74,13 +61,6 @@ CREATE TABLE `message` (
   `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `message`
---
-
-INSERT INTO `message` (`id`, `sender`, `receiver`, `content`, `time`) VALUES
-(47, 'hoangph3', 'hoang', 'haha\r\n', '2020-09-24 09:22:09');
-
 -- --------------------------------------------------------
 
 --
@@ -92,8 +72,8 @@ CREATE TABLE `student` (
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `userpwd` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -101,8 +81,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `username`, `userpwd`, `fullname`, `email`, `phone`) VALUES
-(1006, 'hoang', '1', 'hoang', 'thesilverdevil121@gmail.com', '1'),
-(1007, 'mit', '1', 'mit', '12@12', '1');
+(200023, 'vcshoangp', '1', 'Phạm Hoàng', 'phamhoanghxh1@gmail.com', '0339362666');
 
 -- --------------------------------------------------------
 
@@ -121,7 +100,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `username`, `userpwd`) VALUES
-(1, 'hoangph3', '1');
+(3, 'vcsadmin', '1');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -165,31 +144,31 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT cho bảng `challenge`
 --
 ALTER TABLE `challenge`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `homework`
 --
 ALTER TABLE `homework`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT cho bảng `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1008;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200024;
 
 --
 -- AUTO_INCREMENT cho bảng `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
