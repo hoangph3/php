@@ -65,6 +65,8 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
       $folder_name = './uploads/solution/' .$_FILES['fileUpload']['name'] .'/';
       $create_folder = mkdir($folder_name);
       move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/assignment/' . $_FILES['fileUpload']['name']);
+      $sql = "insert into assignment(title) values ";
+    
     }
 }
 ?>
