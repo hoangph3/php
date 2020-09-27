@@ -66,7 +66,7 @@ else {
         </div><br/>
         <div class="input-group">
             <input type="submit" class="button w3-right" name="submit" value="Submit"/>
-        </div>
+        </div><br/>
         </form>
 <?php 
 if (isset($_POST['submit'])){
@@ -75,10 +75,8 @@ if (isset($_POST['submit'])){
     $filename = $dir . $answer;
 
     if (file_exists($filename)){
-      echo '<br/><h5>Correct Answer !</h5>';
-      $myfile = fopen($filename,"r") or die("Can't open this file !");
-      echo fread($myfile, filesize($filename));
-      fclose($myfile);
+      echo '<br/><h5 style="color:green; font-weight:bold;">Correct Answer !</h5>';
+      echo '<button class="button w3-right" onclick=\'window.open("challenge_answer.php?challenge='.$filename.'","_blank")\' >Show Answer</button>';
     }
     else {
       echo "<script>alert('Incorrect Answer !');</script>";

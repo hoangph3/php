@@ -4,6 +4,16 @@ if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
   header("location: index.php");
 }
 else {
+  //Pagination
+  if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+  }
+  else {
+    $page = 1;
+  }
+  $num_per_page = 03;
+  $start_from = ($page - 1)*03;
+  
   ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -48,17 +58,17 @@ else {
       echo ''; 
       }
   else {
-      echo '<br/><form class="w3-container" action="" method="post" enctype="multipart/form-data">
+      echo '<form class="w3-container" action="" method="post" enctype="multipart/form-data">
               <div class="w3-container">
                   <input class="w3-input w3-border" required="true" style="width:100%;" type="file" name="fileUpload" value="">
               </div><br/>
               <div class="w3-container">
                   <label for="challenge">Name Challenge</label>
-                  <input required="true" type="text" id="challenge" name="challenge" style="width:100%;">
+                  <input class="w3-input w3-border" required="true" type="text" id="challenge" name="challenge" style="width:100%;">
               </div><br/>
               <div class="w3-container">
                   <label for="suggest">Suggestion</label>
-                  <textarea required="true" name="suggest" id="suggest" style="width:100%" rows="5" cols="50" placeholder="Write your hint.."></textarea>
+                  <textarea class="w3-input w3-border" required="true" name="suggest" id="suggest" style="width:100%" rows="5" cols="50" placeholder="Write your hint.."></textarea>
               </div><br/>
               <div class="w3-container">
                   <input class="button w3-right" type="submit" name="up" value="Submit">
@@ -87,14 +97,14 @@ else {
   <table class="styled-table">
       <thead>
         <tr>
-          <th>Your Challenge</th>
+          <th>Challenge</th>
           <th>Your Hint</th>
           <th width="50"></th>
         </tr>
       </thead>
       <tbody>
   <?php 
-  $sql = "select * from challenge";
+  $sql = "select * from challenge limit $start_from,$num_per_page";
   $list_challenge = execute_result($sql);
   foreach ($list_challenge as $quiz) {
   echo '<tr>
@@ -104,9 +114,29 @@ else {
           </tr>';
   }
   ?> 
-          </tbody>
+      </tbody>
   </table>
+  <?php 
+              $pr_query = "select * from challenge";
+              $con = connect_db();
+              $pr_result = mysqli_query($con, $pr_query);
+              $total_record = mysqli_num_rows($pr_result);
+              
+              $total_page = ceil($total_record/$num_per_page);
+              
+              if($page > 1){
+                echo "<a href='challenge.php?page=".($page-1)."' class='w3-button'>&laquo</a>";
+              }
+              
+              for($i=1; $i<$total_page; $i++)
+              {
+                echo "<a href='challenge.php?page=".$i."' class='w3-button'>$i</a>";
+              }
 
+              if($i > $page){
+                echo "<a href='challenge.php?page=".($page+1)."' class='w3-button'>&raquo</a>";
+              }
+  ?>
   </body>
   </html>
   </div>
