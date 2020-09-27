@@ -4,6 +4,15 @@ if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
   header("location: index.php");
 }
 else {
+  if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+  }
+  else {
+    $page = 1;
+  }
+  $num_per_page = 03;
+  $start_from = ($page - 1)*03;
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,15 +71,14 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
       echo "<script>alert('Sorry, something went wrong !');</script>";
     }
     else { 
+      $file_name = $_FILES['fileUpload']['name'];
       $folder_name = './uploads/solution/' .$_FILES['fileUpload']['name'] .'/';
       $create_folder = mkdir($folder_name);
       move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/assignment/' . $_FILES['fileUpload']['name']);
-      $sql = "insert into assignment(title) values ";
-    
     }
 }
 ?>
-    <h2>Your Assignments</h2>
+    <h2>Your Assignment</h2>
     <table class="styled-table">
 		<thead>
 			<tr>
@@ -83,11 +91,11 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
 <?php 
 
 $dir = "./uploads/assignment/";
-
 $all_files = scandir($dir);
 $files = array_diff($all_files, array('.', '..')); 
+$split_files = array_slice($files, $start_from, $num_per_page);
 
-foreach($files as $file){
+foreach($split_files as $file){
   echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>";
   if ($_SESSION['id'] < 500) {
     echo '<td><button onclick=\'window.open("submission.php?task='.$file.'","_self")\'>View Submissions</button></td>';
@@ -101,6 +109,22 @@ foreach($files as $file){
 ?>
 		</tbody>
 	  </table>
+    <?php 
+        $total_page = ceil(count($files)/$num_per_page);
+
+        if($page > 1){
+          echo "<a href='assignment.php?page=".($page-1)."' class='w3-button'>&laquo</a>";
+        }
+        
+        for($i=1; $i<$total_page; $i++)
+        {
+          echo "<a href='assignment.php?page=".$i."' class='w3-button'>$i</a>";
+        }
+
+        if($i > $page){
+          echo "<a href='assignment.php?page=".($page+1)."' class='w3-button'>&raquo</a>";
+        }
+    ?>
   </div>
 </div>
 </body>
