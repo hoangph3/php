@@ -1,4 +1,10 @@
-<?php
+<?php require_once 'utils.php';
+session_start();
+if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
+  header("location: index.php");
+}
+else {
+
 if(isset($_GET['file']))
 {
     $filename = $_GET['file'];
@@ -42,5 +48,6 @@ if (file_exists($file))
     readfile($file);
     exit;
     }
-} 
+  } 
+}
 ?>

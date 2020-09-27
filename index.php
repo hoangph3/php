@@ -18,13 +18,13 @@ if (isset($_POST['dangnhap']))
         $_SESSION['username'] = $row_teacher['username'];
         $_SESSION['userpwd'] = $row_teacher['userpwd'];
         $_SESSION['id'] = $row_teacher['id'];
-        header("location: "."page_admin.php?id=".$_SESSION['id']);
+        header("location: "."admin.php?id=".$_SESSION['id']);
 	}
 	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
         $_SESSION['username'] = $row_student['username'];
         $_SESSION['userpwd'] = $row_student['userpwd'];
         $_SESSION['id'] = $row_student['id'];
-		header("location: "."page_user.php?id=".$_SESSION['id']);
+		header("location: "."user.php?id=".$_SESSION['id']);
 		die();
 	}
 	else {
@@ -39,7 +39,7 @@ if (isset($_POST['dangnhap']))
     </head>
     <body>
         <header>
-            <img src="/css/hack.png" width="64px" height="64px">
+            <img src="/css/logo.png" width="70px" height="70px">
             <h1>Sign in to VCS</h1>
         </header>
         <form method="post" action="index.php">

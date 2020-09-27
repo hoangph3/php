@@ -1,7 +1,14 @@
+<?php require_once 'utils.php';
+session_start();
+if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
+  header("location: index.php");
+}
+else {
+	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Message Box</title>
+<title>Message</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,10 +25,10 @@
 </div>
 
 <ul>
-  <li><a href= <?php echo "page_user.php?id=" .$id ?>>Home</a></li>
-  <li><a href= <?php echo "only_edit_student.php?id=" .$id ?>>Change info</a></li>
-  <li><a href= <?php echo "message_box.php?username=" .$sv['username']?> >Mailbox</a></li>
-  <li><a href=  <?php echo "challenge.php?id=" .$id ?> >Challenge</a></li>
+	<?php 
+    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    else echo '<li><a href="user.php">Home</a></li>';
+    ?>
   <div class="navbar">
     <a href="index.php" class="right">Log out</a>
   </div>
@@ -50,21 +57,20 @@
         <tbody>
 
 <?php require_once 'utils.php'; 
-if (isset($_GET['username'])) {
-    $s_username = $_GET['username']; 
-	$sql = "select * from message where sender = '$s_username' "; 
-    $list_msg = execute_result($sql);
-	foreach ($list_msg as $msg) {
-		echo '<tr>
-				<td>'.$msg['sender'].'</td>
-				<td>'.$msg['receiver'].'</td>
-				<td>'.$msg['content'].'</td>
-				<td>'.$msg['time'].'</td>
-				<td><button class="button button2" onclick=\'window.open("message_edit.php?id='.$msg['id'].'","_self")\'>Sửa</button></td>
-				<td><button class="button button3" onclick="xoa_msg('.$msg['id'].')">Xóa</button></td>
-			</tr>';
-	}
+$s_username = $_SESSION['username'];
+$sql = "select * from message where sender = '$s_username' "; 
+$list_msg = execute_result($sql);
+foreach ($list_msg as $msg) {
+	echo '<tr>
+			<td>'.$msg['sender'].'</td>
+			<td>'.$msg['receiver'].'</td>
+			<td>'.$msg['content'].'</td>
+			<td>'.$msg['time'].'</td>
+			<td><button onclick=\'window.open("message_edit.php?id='.$msg['id'].'","_self")\'>Edit</button></td>
+			<td><button onclick="xoa_msg('.$msg['id'].')">Delete</button></td>
+		</tr>';
 }
+
 ?>
         </tbody>
         </table>
@@ -82,20 +88,21 @@ if (isset($_GET['username'])) {
 		</thead>
 		<tbody>
 <?php 
-if (isset($_GET['username'])) {
-    $s_username = $_GET['username']; 
-	$sql = "select * from message where receiver = '$s_username' "; 
-    $list_msg = execute_result($sql);
-    
-	foreach ($list_msg as $msg) {
-		echo '<tr>
-				<td>'.$msg['sender'].'</td>
-				<td>'.$msg['receiver'].'</td>
-				<td>'.$msg['content'].'</td>
-				<td>'.$msg['time'].'</td>
-			</tr>';
-	}
+
+$sql = "select * from message where receiver = '$s_username' "; 
+$list_msg = execute_result($sql);
+
+foreach ($list_msg as $msg) {
+	echo '<tr>
+			<td>'.$msg['sender'].'</td>
+			<td>'.$msg['receiver'].'</td>
+			<td>'.$msg['content'].'</td>
+			<td>'.$msg['time'].'</td>
+			<td><button class="w3-disabled">Edit</button></td>
+			<td><button class="w3-disabled">Delete</button></td>
+		</tr>';
 }
+
 ?>
 		</tbody>
 	    </table>
@@ -117,3 +124,6 @@ if (isset($_GET['username'])) {
 			}	
 		}
 </script>
+
+<?php 
+}

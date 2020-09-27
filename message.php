@@ -1,69 +1,101 @@
-<!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<html>
-<head>
-	<title>Message</title>
-	<h1>Trang gửi tin nhắn</h1>
-</head>
-<body>
 <?php require_once 'utils.php';
-if (isset($_POST['message'])) 
-{
-	if(isset($_GET['id']))
+session_start();
+if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
+  header("location: index.php");
+}
+else {
+	$s_sender = $_SESSION['username'];
 	
-	$s_senderpwd = addslashes($_POST['senderpwd']);
+	$id = $_GET['id'];
+	$sql = "select * from student where id=" .$id;
+	$list_student = execute_result($sql) ;
+	if ($list_student != null && count($list_student) > 0) {
+		$sv        = $list_student[0];
+		$s_username = $sv['username'];
+	} else {
+		$id = '';
+	}
 
 	$s_receiver = addslashes($_POST['receiver']);
-    $s_content = $_POST['content'];
-	 
-	$sql_teacher = "select * from teacher WHERE username = '$s_sender' and userpwd = '$s_senderpwd' ";
-	$row_teacher = execute_result($sql_teacher);
-	$list_teacher = $row_teacher[0];
-	$user_teacher = $list_teacher['username'];
 
-	$sql_student = "select * from student WHERE username = '$s_sender' and userpwd = '$s_senderpwd' ";
-	$row_student = execute_result($sql_student);
-	$list_student = $row_student[0];
-	$user_student = $list_student['username']; 
-		
-	if (!empty($user_student))
-	{
+	$s_content = $_POST['content'];
+
+	if (isset($_POST['message'])) 
+	{		
 		$sql = "insert into message(sender, receiver, content, time) 
-		value ('$user_student', '$s_receiver', '$s_content', NOW())";
+		value ('$s_sender', '$s_receiver', '$s_content', NOW() )";
 		execute($sql); 
-		header("location: page_sub.php?id=".$list_student['id']);		
-	}	
-	else if (!empty($user_teacher)){
-		$sql = "insert into message(sender, receiver, content, time) 
-		value ('$user_teacher', '$s_receiver', '$s_content', NOW())";
-		execute($sql); 
-		header("location: page_main.php?id=".$list_teacher['id']);
+		 
+		if ($_SESSION['id']<500) header("location: admin.php");
+		else header("location: user.php");
 	}
-	else {
-		echo '<div><h3>Kiểm tra lại thông tin người gửi!</h3></div>';
-	}
-}
 ?>
-	<form method="post" action="message.php">
-		<div class="input-group">
-			<label for="sender">Người gửi</label>
-			<input required="true" type="text" class="form-control" id="sender" name="sender"></input>
-        </div>
-        <div class="input-group">
-			<label for="senderpwd">Mật khẩu</label>
-			<input required="true" type="password" class="form-control" id="senderpwd" name="senderpwd"></input>
-		</div>
-		<div class="input-group">
-			<label for="receiver">Người nhận</label>
-			<input required="true" type="text" class="form-control" id="receiver" name="receiver"></input>
-		</div>
-		<div class="input-group">
-			<label for="content">Nội dung</label>
-			<textarea require="true" name="content" id="content" rows="10" cols="75"></textarea>
-		</div>
-		<div class="input-group">
-            <input type="submit" class="button buton1" name="message" value="Gửi ngay!"/>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <title>Message</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/w3.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+
+  <div class="header">
+    <h1>Viettel Cyber Security</h1>
+    <p>BigData and Machine Learning</p>
+  </div>
+
+  <ul>
+    <?php 
+    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    else echo '<li><a href="user.php">Home</a></li>';
+    ?>
+    <div class="navbar">
+      <a href="log_out.php" class="right">Log out</a>
+    </div>
+  </ul>
+
+  <div class="row">
+    <div class="side">
+      <h2>About Me</h2>
+      <h5>Photo of me:</h5>
+      <img src="/css/hack.png" width="250px" height="250px">
+      <h5>While hack we dev - While dev we hack</h5>
+    </div>
+    <div class="main">
+	  <h2>Send Message</h2>
+	<form method="post" action="">
+		<div class="w3-container">
+			<label for="sender">From</label>
+			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="sender" name="sender" value="<?=$s_sender?>" readonly>
+        </div><br/>
+		<div class="w3-container">
+			<label for="receiver">To</label>
+			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="receiver" name="receiver" placeholder="<?=$s_username?>">
+		</div><br/>
+		<div class="w3-container">
+			<label for="content">Content</label>
+			<textarea name="content" id="content" class="w3-input w3-animate-input" style="width:50%" rows="10" cols="75" placeholder="Write something.."></textarea>
+		</div><br/>
+		<div class="w3-container">
+            <input type="submit" class="w3-button w3-right w3-teal" name="message" value="Send >>"/>
 		</div>
 	</form>
+	</div>
+</div>
+
+<div class="footer">
+<h2>Contact me</h2>
+<p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
+</div>
 </body>
 </html>
+
+<?php 
+}
