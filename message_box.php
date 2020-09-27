@@ -4,6 +4,28 @@ if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
   header("location: index.php");
 }
 else {
+	
+	//Pagination
+	if (isset($_GET['page'])) {
+	  $page = $_GET['page'];
+	}
+	else {
+	  $page = 1;
+	}
+	$num_per_page = 03;
+	$start_from = ($page - 1)*03;
+
+
+	//Pagination
+	if (isset($_GET['ibpage'])) {
+		$ibpage = $_GET['ibpage'];
+	}
+	else {
+	$ibpage = 1;
+	}
+	$num_per_ibpage = 03;
+	$ibstart_from = ($ibpage - 1)*03;
+
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +80,7 @@ else {
 
 <?php require_once 'utils.php'; 
 $s_username = $_SESSION['username'];
-$sql = "select * from message where sender = '$s_username' "; 
+$sql = "select * from message where sender = '$s_username' limit $start_from,$num_per_page "; 
 $list_msg = execute_result($sql);
 foreach ($list_msg as $msg) {
 	echo '<tr>
@@ -70,10 +92,31 @@ foreach ($list_msg as $msg) {
 			<td><button onclick="xoa_msg('.$msg['id'].')">Delete</button></td>
 		</tr>';
 }
-
 ?>
         </tbody>
         </table>
+		<?php 
+              $pr_query = "select * from message where sender = '$s_username' ";
+              $con = connect_db();
+              $pr_result = mysqli_query($con, $pr_query);
+              $total_record = mysqli_num_rows($pr_result);
+              
+              $total_page = ceil($total_record/$num_per_page);
+              
+              if($page > 1){
+                echo "<a href='message_box.php?page=".($page-1)."' class='w3-button'>&laquo</a>";
+              }
+              
+              for($i=1; $i<$total_page; $i++)
+              {
+                echo "<a href='message_box.php?page=".$i."' class='w3-button'>$i</a>";
+              }
+
+              if($i > $page){
+                echo "<a href='message_box.php?page=".($page+1)."' class='w3-button'>&raquo</a>";
+              }
+
+          ?>
       <h2>Inbox</h2>
       <table class="styled-table">
 		<thead>
@@ -89,7 +132,7 @@ foreach ($list_msg as $msg) {
 		<tbody>
 <?php 
 
-$sql = "select * from message where receiver = '$s_username' "; 
+$sql = "select * from message where receiver = '$s_username' limit $ibstart_from,$num_per_ibpage"; 
 $list_msg = execute_result($sql);
 
 foreach ($list_msg as $msg) {
@@ -106,6 +149,27 @@ foreach ($list_msg as $msg) {
 ?>
 		</tbody>
 	    </table>
+		<?php 
+              $ibpr_query = "select * from message where receiver = '$s_username' ";
+              $con = connect_db();
+              $ibpr_result = mysqli_query($con, $ibpr_query);
+              $ibtotal_record = mysqli_num_rows($ibpr_result);
+              
+              $ibtotal_page = ceil($ibtotal_record/$num_per_ibpage);
+              
+              if($ibpage > 1){
+                echo "<a href='message_box.php?ibpage=".($ibpage-1)."' class='w3-button'>&laquo</a>";
+              }
+              
+              for($j=1; $j<$total_page; $j++)
+              {
+                echo "<a href='message_box.php?ibpage=".$j."' class='w3-button'>$j</a>";
+              }
+
+              if($j > $ibpage){
+                echo "<a href='message_box.php?ibpage=".($ibpage+1)."' class='w3-button'>&raquo</a>";
+              }
+          ?>
   </div>
 </div>
 </body>

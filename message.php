@@ -77,7 +77,7 @@ else {
         </div><br/>
 		<div class="w3-container">
 			<label for="receiver">To</label>
-			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="receiver" name="receiver" placeholder="<?=$s_username?>">
+			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="receiver" name="receiver" value="<?=$s_username?>">
 		</div><br/>
 		<div class="w3-container">
 			<label for="content">Content</label>
