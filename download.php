@@ -9,7 +9,7 @@ if(isset($_GET['file']))
 {
     $filename = $_GET['file'];
 
-$dir = "uploads/"; 
+$dir = "uploads/assignment/"; 
 $file = $dir . $filename;
 
 if (file_exists($file))
@@ -27,12 +27,10 @@ if (file_exists($file))
     exit;
     }
 }
+
 else if(isset($_GET['answer']))
 {
-    $filename = $_GET['answer'];
-
-$dir = "./admin/answer/"; 
-$file = $dir . $filename;
+    $file = $_GET['answer'];
 
 if (file_exists($file))
     {

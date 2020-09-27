@@ -50,8 +50,8 @@ else {
       echo '<h2>Create Assignment</h2>
             <form class="w3-container" action="" method="post" enctype="multipart/form-data">
               <div class="w3-container">
-                <input class="w3-input w3-border" type="file" name="fileUpload" value=""><br/>
-              </div>
+                <input class="w3-input w3-border" type="file" name="fileUpload" value="">
+              </div><br/>
               <div class="w3-container">
                 <input class="button w3-right" type="submit" name="up" value="Upload &raquo;">
               </div>
@@ -59,9 +59,12 @@ else {
 }
 if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
     if ($_FILES['fileUpload']['error'] > 0) {
+      echo "<script>alert('Sorry, something went wrong !');</script>";
     }
-    else {
-        move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/' . $_FILES['fileUpload']['name']);
+    else { 
+      $folder_name = './uploads/solution/' .$_FILES['fileUpload']['name'] .'/';
+      $create_folder = mkdir($folder_name);
+      move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/assignment/' . $_FILES['fileUpload']['name']);
     }
 }
 ?>
@@ -69,21 +72,28 @@ if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
     <table class="styled-table">
 		<thead>
 			<tr>
-        <th width=850>Assignment</th>
-        <th></th>
+        <th width="600">Assignment</th>
+        <th width="150"></th>
+        <th width="50"></th>
 			</tr>
 		</thead>
 		<tbody>
 <?php 
 
-$dir = "./uploads/";
+$dir = "./uploads/assignment/";
 
 $all_files = scandir($dir);
 $files = array_diff($all_files, array('.', '..')); 
 
 foreach($files as $file){
-  echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>"
-    .'<td><button onclick=\'window.open("up_answer.php","_self")\'>Submit</button></td>
+  echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>";
+  if ($_SESSION['id'] < 500) {
+    echo '<td><button onclick=\'window.open("submission.php?task='.$file.'","_self")\'>View Submissions</button></td>';
+  }
+  else {
+    echo '<td><button class="w3-button w3-disabled">View Submissions</button></td>';
+  }
+  echo '<td><button onclick=\'window.open("solution.php?task='.$file.'","_self")\'>Submit</button></td>
     </tr>';
 }
 ?>

@@ -40,7 +40,7 @@ else {
   <ul>
     <li><a href= <?php echo "user.php" ?> >Home</a></li>
     <li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
-    <li><a href= <?php echo "up_task.php"?> >Assignment</a></li>
+    <li><a href= <?php echo "assignment.php"?> >Assignment</a></li>
     <li><a href="challenge.php">Challenge</a></li>
     <div class="navbar">
       <a href="log_out.php" class="right">Log out</a>

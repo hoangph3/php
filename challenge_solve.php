@@ -29,11 +29,16 @@ else {
     if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
     
-    $id = $_GET['id'];
-    $sql = "select * from challenge where id=" .$id;
-    $list_suggest = execute_result($sql);
-    $idea = $list_suggest[0];
-    $your_hint = $idea['suggest'];
+    if (isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+        $sql = "select * from challenge where id = " .$id;
+        $list_challenge= execute_result($sql);
+        $quiz = $list_challenge[0];
+        
+        $challenge = $quiz['name'];
+        $your_hint = $quiz['suggest'];
+    }
 
     ?>
     <div class="navbar">
@@ -53,7 +58,7 @@ else {
         <form method="post" action="">
         <div class="w3-container">
             <label for="hint">Suggestion</label>
-            <textarea name="hint" id="hint" class="w3-input w3-animate-input" style="width:50%" rows="3" cols="50" placeholder="<?= $your_hint ?>"></textarea>
+            <textarea name="hint" id="hint" class="w3-input w3-animate-input" style="width:50%" rows="3" cols="50" placeholder="<?= $your_hint ?>" readonly></textarea>
         </div><br/>
         <div class="w3-container">
             <label for="answer">Your answer</label>
@@ -66,18 +71,17 @@ else {
 <?php 
 if (isset($_POST['submit'])){
     $answer = $_POST['answer'].'.txt';
-    $dir = './admin/challenge/';
+    $dir = 'uploads/challenge/' . $challenge .'/';
     $filename = $dir . $answer;
-    
+
     if (file_exists($filename)){
-        echo 'Correct ! <br/>';
-        echo 'Answer: <br/>';
-        $myfile = fopen($filename,"r") or die("Can't open this file !");
-        echo fread($myfile, filesize($filename));
-        fclose($myfile);
+      echo '<br/><h5>Correct Answer !</h5>';
+      $myfile = fopen($filename,"r") or die("Can't open this file !");
+      echo fread($myfile, filesize($filename));
+      fclose($myfile);
     }
     else {
-        echo 'Wrong !';
+      echo "<script>alert('Incorrect Answer !');</script>";
     }
 }
 ?>

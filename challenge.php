@@ -53,6 +53,10 @@ else {
                   <input class="w3-input w3-border" required="true" style="width:100%;" type="file" name="fileUpload" value="">
               </div><br/>
               <div class="w3-container">
+                  <label for="challenge">Name Challenge</label>
+                  <input required="true" type="text" id="challenge" name="challenge" style="width:100%;">
+              </div><br/>
+              <div class="w3-container">
                   <label for="suggest">Suggestion</label>
                   <textarea required="true" name="suggest" id="suggest" style="width:100%" rows="5" cols="50" placeholder="Write your hint.."></textarea>
               </div><br/>
@@ -63,14 +67,19 @@ else {
       }
   
   if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
-      if ($_FILES['fileUpload']['error'] > 0) {}
+      if ($_FILES['fileUpload']['error'] > 0) {
+        echo "<script>alert('Can't Upload this file !');</script>";
+      }
       else {
-          move_uploaded_file($_FILES['fileUpload']['tmp_name'], './admin/challenge/' . $_FILES['fileUpload']['name']);
-          $name_challenge = $_POST['nameChallenge'];
+          $challenge = $_POST['challenge'];
           $suggest = $_POST['suggest'];
+          
+          $folder_name = './uploads/challenge/' .$challenge .'/';
+          $create_folder = mkdir($folder_name);
+          move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folder_name . $_FILES['fileUpload']['name']);  
       }
   }
-  $sql = "insert into challenge(suggest) value('$suggest')";
+  $sql = "insert into challenge(name, suggest) value('$challenge','$suggest')";
   if ($suggest != '') {
       execute($sql);
   }
@@ -78,6 +87,7 @@ else {
   <table class="styled-table">
       <thead>
         <tr>
+          <th>Your Challenge</th>
           <th>Your Hint</th>
           <th width="50"></th>
         </tr>
@@ -85,11 +95,12 @@ else {
       <tbody>
   <?php 
   $sql = "select * from challenge";
-  $list_suggest = execute_result($sql);
-  foreach ($list_suggest as $idea) {
+  $list_challenge = execute_result($sql);
+  foreach ($list_challenge as $quiz) {
   echo '<tr>
-              <td>'.$idea['suggest'].'</td>
-              <td><button class="button button2" onclick=\'window.open("challenge_solve.php?id='.$idea['id'].'","_self")\'>Solve</button></td>
+              <td>'.$quiz['name'].'</td>
+              <td>'.$quiz['suggest'].'</td>
+              <td><button onclick=\'window.open("challenge_solve.php?id='.$quiz['id'].'","_self")\'>Solve</button></td>
           </tr>';
   }
   ?> 

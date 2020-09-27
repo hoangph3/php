@@ -54,7 +54,7 @@ else {
                   <th>Full name</th>
                   <th>Email</th>
                   <th>Phone</th>
-                  <th width="50"></th>
+                  <th width="140"></th>
               </tr>
           </thead>
           <tbody>
