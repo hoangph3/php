@@ -1,7 +1,7 @@
 # Web Security - VCS <br/>
 ### Public Account: <br/>
 Teacher: <br/>
-- Username: vcsadmin
+- Username: vcsadmin 
 - Password: 1
 <br/>
 Student: <br/>
