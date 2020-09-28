@@ -63,10 +63,6 @@ else {
                   <input class="w3-input w3-border" required="true" style="width:100%;" type="file" name="fileUpload" value="">
               </div><br/>
               <div class="w3-container">
-                  <label for="challenge">Name Challenge</label>
-                  <input class="w3-input w3-border" required="true" type="text" id="challenge" name="challenge" style="width:100%;">
-              </div><br/>
-              <div class="w3-container">
                   <label for="suggest">Suggestion</label>
                   <textarea class="w3-input w3-border" required="true" name="suggest" id="suggest" style="width:100%" rows="5" cols="50" placeholder="Write your hint.."></textarea>
               </div><br/>
@@ -81,9 +77,8 @@ else {
         echo "<script>alert('Can't Upload this file !');</script>";
       }
       else {
-          $challenge = $_POST['challenge'];
+          $challenge = substr(md5(time()), 0, 10);
           $suggest = $_POST['suggest'];
-          
           $folder_name = './uploads/challenge/' .$challenge .'/';
           $create_folder = mkdir($folder_name);
           move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folder_name . $_FILES['fileUpload']['name']);  
@@ -97,7 +92,6 @@ else {
   <table class="styled-table">
       <thead>
         <tr>
-          <th>Challenge</th>
           <th>Your Hint</th>
           <th width="50"></th>
         </tr>
@@ -108,7 +102,6 @@ else {
   $list_challenge = execute_result($sql);
   foreach ($list_challenge as $quiz) {
   echo '<tr>
-              <td>'.$quiz['name'].'</td>
               <td>'.$quiz['suggest'].'</td>
               <td><button onclick=\'window.open("challenge_solve.php?id='.$quiz['id'].'","_self")\'>Solve</button></td>
           </tr>';

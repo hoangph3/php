@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<title>Answer a Challenge</title>
 <?php require_once 'utils.php';
 session_start();
 if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
@@ -13,4 +15,3 @@ else {
         fclose($file);
     }
 }    
-?>
