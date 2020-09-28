@@ -74,9 +74,16 @@ if (isset($_POST['submit'])){
     $dir = 'uploads/challenge/' . $challenge .'/';
     $filename = $dir . $answer;
 
+    $answer_maybe = $_POST['answer'];
+    $filename_maybe = $dir . $answer_maybe;
+
     if (file_exists($filename)){
       echo '<br/><h5 style="color:green; font-weight:bold;">Correct Answer !</h5>';
       echo '<button class="button w3-right" onclick=\'window.open("challenge_answer.php?challenge='.$filename.'","_blank")\' >Show Answer</button>';
+    }
+    else if (file_exists($filename_maybe)){
+      echo '<br/><h5 style="color:green; font-weight:bold;">Correct Answer !</h5>';
+      echo '<button class="button w3-right" onclick=\'window.open("challenge_answer.php?challenge='.$filename_maybe.'","_blank")\' >Show Answer</button>';
     }
     else {
       echo "<script>alert('Incorrect Answer !');</script>";
