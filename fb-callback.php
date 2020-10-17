@@ -40,3 +40,6 @@ echo 'Email:' . $me->getEmail();
 $_SESSION['fb_access_token'] = (string) $accessToken;
 // Từ đây bạn xử lý kiểm tra thông tin user trong database sau đó xử lý.
 ?>
+
+<a href="log_out.php">Log out</a>
+

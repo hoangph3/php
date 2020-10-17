@@ -44,9 +44,6 @@ $permissions = ['email']; // Optional permissions
 $loginUrl = $helper->getLoginUrl('http://localhost/qlsv-php/fb-callback.php', $permissions);
 ?>
 
-
-
-
 <html>
     <head>
         <title>Login</title>
