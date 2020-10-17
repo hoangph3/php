@@ -63,7 +63,7 @@ else {
 
   <?php 
   if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
-    $s_username = $_SESSION['username'];
+    if(isset($_SESSION['username'])) $s_username = $_SESSION['username']; else $s_username='';
     if ($_FILES['fileUpload']['error'] > 0) {
       echo "<script>alert('Sorry, something went wrong !');</script>";
     }

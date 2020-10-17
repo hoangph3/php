@@ -1,4 +1,6 @@
 <?php require_once 'vendor/autoload.php';
+require_once 'utils.php';
+
 session_start();
 $fb = new \Facebook\Facebook([
     'app_id'      => '795480281239142',
@@ -33,13 +35,31 @@ echo 'Bad request';
 exit;
 }
 // Logged in
-$me = $response->getGraphUser();
-echo 'Logged in as: ' . $me->getName();
-echo 'ID:' . $me->getId();
-echo 'Email:' . $me->getEmail();
 $_SESSION['fb_access_token'] = (string) $accessToken;
-// Từ đây bạn xử lý kiểm tra thông tin user trong database sau đó xử lý.
-?>
+$me = $response->getGraphUser();
 
-<a href="log_out.php">Log out</a>
+// Thao tac voi database
+$fullname = $me->getName();
+$email = $me->getEmail();
+$facebook_id = $me->getId();
+
+$conn = connect_db();
+$sql = 'select * from student where facebook_id = '.$facebook_id;
+$query = mysqli_query($conn, $sql);
+if (mysqli_num_rows($query) > 0) {
+    $result = mysqli_fetch_array($query);
+}
+else {
+    $sql = " insert into student(fullname, email, facebook_id) value ('$fullname', '$email', '$facebook_id') "; 
+    execute($sql);
+    $sql = 'select * from student where facebook_id = '.$facebook_id;
+    $query = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_array($query);
+}
+$_SESSION['id'] = $result['id'];
+$_SESSION['facebook_id'] = $facebook_id;
+header("location: user.php");
+
+
+
 

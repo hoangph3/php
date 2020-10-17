@@ -79,7 +79,7 @@ else {
         <tbody>
 
 <?php require_once 'utils.php'; 
-$s_username = $_SESSION['username'];
+if(isset($_SESSION['username'])) $s_username = $_SESSION['username']; else $s_username='';
 $sql = "select * from message where sender = '$s_username' limit $start_from,$num_per_page "; 
 $list_msg = execute_result($sql);
 foreach ($list_msg as $msg) {

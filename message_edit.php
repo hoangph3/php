@@ -37,7 +37,7 @@ else {
 			$s_sender = $msg['sender'];
 			$s_receiver  = $msg['receiver'];
 			$s_content = $msg['content'];
-			$s_date  = $msg['date'];
+			$s_date  = $msg['time'];
 		} else {
 			$id = '';
 		}

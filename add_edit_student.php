@@ -30,7 +30,7 @@ else {
 	if (isset($_GET['id'])) {
 		$id          = $_GET['id'];
 		$sql         = 'select * from student where id = '.$id; 
-		$list_student = execute_result($sql) ;
+		$list_student = execute_result($sql);
 		if ($list_student != null && count($list_student) > 0) {
 			$sv        = $list_student[0];
 			$s_username = $sv['username'];
@@ -86,7 +86,7 @@ else {
 				<label for="username">Username</label>
 				<input type="number" name="id" value="<?=$id?>" style="display: none;">
 				<?php 
-				if ($_SESSION['id']<500) { ?>
+				if (($_SESSION['id']<500) || isset($_SESSION['facebook_id'])) { ?>
 				<input required="true" class="w3-input w3-animate-input" type="text" style="width:50%" id="username" name="username" value="<?=$s_username?>"><br/> 
 				<?php }
 				else { ?> 
@@ -100,7 +100,7 @@ else {
 			<div class="w3-container">
 				<label for="fullname">Full name</label>
 				<?php 
-				if ($_SESSION['id']<500) { ?>
+				if ($_SESSION['id']<500 || isset($_SESSION['facebook_id'])) { ?>
 				<input required="true" class="w3-input w3-animate-input" type="text" style="width:50%" id="fullname" name="fullname" value="<?=$s_fullname?>"><br/> 
 				<?php }
 				else { ?>

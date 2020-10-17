@@ -4,8 +4,7 @@ if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
   header("location: index.php");
 }
 else {
-	$s_sender = $_SESSION['username'];
-	
+  if(isset($_SESSION['username'])) $s_sender = $_SESSION['username']; else $s_sender='';
 	$id = $_GET['id'];
 	$sql = "select * from student where id=" .$id;
 	$list_student = execute_result($sql) ;

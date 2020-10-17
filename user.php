@@ -1,10 +1,9 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
+if (empty($_SESSION['id'])) {
   header("location: index.php");
 }
 else {
-
   //Pagination
   if (isset($_GET['page'])) {
     $page = $_GET['page'];
