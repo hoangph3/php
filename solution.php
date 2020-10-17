@@ -41,7 +41,7 @@ else {
     <div class="side">
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
-      <img src="/css/hack.png" width="250px" height="250px">
+      <img src="hack.png" width="250px" height="250px">
       <p>While hack we dev - While dev we hack</p>
     </div>
     <div class="main">

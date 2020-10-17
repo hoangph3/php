@@ -48,7 +48,7 @@ else {
     <div class="side">
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
-      <img src="/css/hack.png" width="250px" height="250px">
+      <img src="hack.png" width="250px" height="250px">
       <p>While hack we dev - While dev we hack</p>
     </div>
     <div class="main">
@@ -82,11 +82,9 @@ else {
           $folder_name = './uploads/challenge/' .$challenge .'/';
           $create_folder = mkdir($folder_name);
           move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folder_name . $_FILES['fileUpload']['name']);  
+          $sql = "insert into challenge(name, suggest) value('$challenge','$suggest')";
+          execute($sql);
       }
-  }
-  $sql = "insert into challenge(name, suggest) value('$challenge','$suggest')";
-  if ($suggest != '') {
-      execute($sql);
   }
   ?>
   <table class="styled-table">

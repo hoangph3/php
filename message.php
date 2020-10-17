@@ -16,12 +16,11 @@ else {
 		$id = '';
 	}
 
-	$s_receiver = addslashes($_POST['receiver']);
-
-	$s_content = $_POST['content'];
+	$s_receiver = $s_username;
 
 	if (isset($_POST['message'])) 
 	{		
+    $s_content = $_POST['content'];
 		$sql = "insert into message(sender, receiver, content, time) 
 		value ('$s_sender', '$s_receiver', '$s_content', NOW() )";
 		execute($sql); 
@@ -65,7 +64,7 @@ else {
     <div class="side">
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
-      <img src="/css/hack.png" width="250px" height="250px">
+      <img src="hack.png" width="250px" height="250px">
       <h5>While hack we dev - While dev we hack</h5>
     </div>
     <div class="main">
