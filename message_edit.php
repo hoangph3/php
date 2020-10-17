@@ -68,7 +68,10 @@ else {
     <?php 
     if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
-    ?>
+	?>
+	<li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
+	<li><a href= <?php echo "assignment.php"?> >Assignment</a></li>
+	<li><a href="challenge.php">Challenge</a></li>
     <div class="navbar">
       <a href="log_out.php" class="right">Log out</a>
     </div>
