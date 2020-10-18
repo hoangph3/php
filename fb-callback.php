@@ -59,7 +59,3 @@ else {
 $_SESSION['id'] = $result['id'];
 $_SESSION['facebook_id'] = $facebook_id;
 header("location: user.php");
-
-
-
-

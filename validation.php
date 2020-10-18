@@ -1,59 +1,43 @@
 <?php require_once 'utils.php';
 session_start();
-if (isset($_POST['dangnhap'])) 
-{
-    $connect = connect_db();
-    $s_username = addslashes($_POST['username']);
-    $s_userpwd = addslashes($_POST['userpwd']);
-     
-	$sql_teacher = "select * from teacher where username = '$s_username' and userpwd = '$s_userpwd' ";
-	$query_teacher = mysqli_query($connect, $sql_teacher);
-	$row_teacher = mysqli_fetch_array($query_teacher);
-	
-	$sql_student = "select * from student where username = '$s_username' and userpwd = '$s_userpwd' ";
-	$query_student = mysqli_query($connect, $sql_student);
-	$row_student = mysqli_fetch_array($query_student);
-     
-    if (($row_teacher['username'] == $s_username) && ($row_teacher['userpwd'] == $s_userpwd)){
-        $_SESSION['auth'] = $s_username; 
-        header("location: authentication.php");
-	}
-	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
-        $_SESSION['auth'] = $s_username; 
-        header("location: authentication.php");
-	}
-	else {
-		header("location: index.php");
-	}
-}
-?>
-<?php require_once 'vendor/autoload.php';
-// Login with Facebook
-$fb = new \Facebook\Facebook([
-    'app_id'      => '795480281239142',
-    'app_secret'     => 'e0e4a86a02bba6a3c36d344e327dd9e1',
-    'default_graph_version'  => 'v8.0'
-  ]);
-$helper = $fb->getRedirectLoginHelper();
-$permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('http://localhost/qlsv-php/fb-callback.php', $permissions);
-?>
+$connect = connect_db();
+if (isset($_POST['validation'])){
+    $auth_code = addslashes($_POST['authcode']);
+    if($auth_code == $_SESSION['auth_code'])
+    {
+        $s_username = $_SESSION['auth'];
+        $sql_teacher = " select * from teacher where username = '$s_username' ";
+        $query_teacher = mysqli_query($connect, $sql_teacher);
+        $row_teacher = mysqli_fetch_array($query_teacher);
+        
+        $sql_student = " select * from student where username = '$s_username' ";
+        $query_student = mysqli_query($connect, $sql_student);
+        $row_student = mysqli_fetch_array($query_student);
 
+        if (($row_teacher['username'] == $s_username)){
+            $_SESSION['username'] = $row_teacher['username'];
+            $_SESSION['userpwd'] = $row_teacher['userpwd'];
+            $_SESSION['id'] = $row_teacher['id'];
+            header("location: "."admin.php?id=".$_SESSION['id']);
+        }
+        else if(($row_student['username'] == $s_username)){
+            $_SESSION['username'] = $row_student['username'];
+            $_SESSION['userpwd'] = $row_student['userpwd'];
+            $_SESSION['id'] = $row_student['id'];
+            header("location: "."user.php?id=".$_SESSION['id']);
+        }
+    }
+    else {
+        header("location: validation.php");
+    }
+}
+
+?>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Login</title>
         <style>
-            /*
-COLORS
-body: #f9f9f9
-loginbox-border/new-border: #d8dee2
-loginbox-background: #fff;
-inputs-border: #d1d5da;
-submit-background-color: #28a745;
-submit-background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
-ul-contact: #586069;
-ul-contact-default: #0000EE;
-*/
 body{
     margin: 0;
     padding: 0;
@@ -188,23 +172,16 @@ li a:hover{
     </head>
     <body>
         <header>
-            <img src="logo.png" width="70px" height="70px">
-            <h1>Sign in to VCS</h1>
+            <h1>Authentication</h1>
         </header>
-        <form method="post" action="index.php">
+        <form method="post" action="">
 		<div id="loginbox">
-            <label id="username">
-                <p>Username</p>
-                <input required="true" type="text" id="username" name="username">
+            <label id="authcode">
+                <p>Enter your code</p>
+                <input required="true" type="text" id="authcode" name="authcode">
             </label>
-            <label id="userpwd">
-                <p>Password</p>
-                <input required="true" type="password" id="userpwd" name="userpwd">
-            </label>
-            <input type="submit" name="dangnhap" value="Sign in">
-            <div id="new">
-                <p>You have facebook? <a href="<?= $loginUrl ?>">Login with Facebook</a></p>
-            </div>
+            <input type="submit" name="validation" value="Submit"><br/>
+            <p>Can't receive a code? <a href="authentication.php">Try again</a></p>
         </div>  
 		</form>
     </body>

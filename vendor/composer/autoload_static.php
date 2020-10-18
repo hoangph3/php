@@ -11,6 +11,18 @@ class ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Sonata\\GoogleAuthenticator\\' => 27,
+        ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'G' => 
+        array (
+            'Google\\Authenticator\\' => 21,
+        ),
         'F' => 
         array (
             'Facebook\\' => 9,
@@ -18,10 +30,26 @@ class ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f
     );
 
     public static $prefixDirsPsr4 = array (
+        'Sonata\\GoogleAuthenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Google\\Authenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
+        ),
         'Facebook\\' => 
         array (
             0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
+    );
+
+    public static $classMap = array (
+        'PHPGangsta_GoogleAuthenticator' => __DIR__ . '/..' . '/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -29,6 +57,7 @@ class ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit37f4352f7278b112e21d7963a97a4e2f::$classMap;
 
         }, null, ClassLoader::class);
     }
