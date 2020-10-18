@@ -82,7 +82,7 @@ else {
 		</div><br/>
 		<div class="w3-container">
 			<label for="content">Content</label>
-			<textarea name="content" id="content" class="w3-input w3-animate-input" style="width:50%" rows="10" cols="75" placeholder="Write something.."></textarea>
+			<textarea required="true" name="content" id="content" class="w3-input w3-animate-input" style="width:50%" rows="10" cols="75" placeholder="Write something.."></textarea>
 		</div><br/>
 		<div class="w3-container">
             <input type="submit" class="w3-button w3-right w3-teal" name="message" value="Send >>"/>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th9 28, 2020 lúc 01:01 AM
+-- Thời gian đã tạo: Th10 17, 2020 lúc 09:08 PM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.10
+-- Phiên bản PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -82,7 +82,8 @@ INSERT INTO `message` (`id`, `sender`, `receiver`, `content`, `time`) VALUES
 (65, 'vcsadmin', 'hoangph3', 'Tam biet', '2020-09-28 05:48:52'),
 (66, 'vcsadmin', 'hoang', 'xin chao tiep', '2020-09-28 05:49:00'),
 (67, 'vcshoangp', 'vcsadmin', 'Xin chao', '2020-09-28 05:49:59'),
-(68, 'hoang', 'vcsadmin', 'Khong co gi', '2020-09-28 05:50:58');
+(68, 'hoang', 'vcsadmin', 'Khong co gi', '2020-09-28 05:50:58'),
+(69, '', 'hoangph3', '', '2020-10-18 02:07:38');
 
 -- --------------------------------------------------------
 
@@ -92,29 +93,29 @@ INSERT INTO `message` (`id`, `sender`, `receiver`, `content`, `time`) VALUES
 
 CREATE TABLE `student` (
   `id` int(10) NOT NULL,
-  `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `userpwd` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userpwd` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `student`
 --
 
-INSERT INTO `student` (`id`, `username`, `userpwd`, `fullname`, `email`, `phone`) VALUES
-(200023, 'vcshoangp', '1', 'Phạm Hoàng', 'phamhoanghxh1@gmail.com', '0339362666'),
-(200024, 'hoangph3', '1', 'Hoàng Phạm', 'ph292292@gmail.com', '000'),
-(200025, 'hoang', '1', '121212', '121212@212', '1212'),
-(200026, 'mit', '1', 'Mít', 'thesilverdevil121@gmail.com', '1'),
-(200027, 'cam', '1', 'Cam', '12@3', '1'),
-(200028, 'tao', '1', 'Táo', '121212@asa1', '1'),
-(200029, 'xoai', '1', 'Xoài', '12@3', '1'),
-(200030, 'dao', '1', 'Đào Tấn', '111111111111111@aa', '1'),
-(200031, 'an', '1', 'Trần Văn An', '111111111111111@aa', '112'),
-(200032, 'tho', '1', 'Thọ', '12@3', '1'),
-(200033, 'hai', '1', 'Hài', '12121@a', '1');
+INSERT INTO `student` (`id`, `username`, `userpwd`, `fullname`, `email`, `phone`, `facebook_id`) VALUES
+(200023, 'vcshoangp', '1', 'Phạm Hoàng', 'phamhoanghxh1@gmail.com', '0339362666', NULL),
+(200024, 'hoangph3', '1', 'Hoàng Phạm', 'ph292292@gmail.com', '000', NULL),
+(200025, 'hoang', '1', '121212', '121212@212', '1212', NULL),
+(200028, 'tao', '1', 'Táo', '121212@asa1', '1', NULL),
+(200029, 'xoai', '1', 'Xoài', '12@3', '1', NULL),
+(200030, 'dao', '1', 'Đào Tấn', '111111111111111@aa', '1', NULL),
+(200031, 'an', '1', 'Trần Văn An', '111111111111111@aa', '112', NULL),
+(200032, 'tho', '1', 'Thọ', '12@3', '1', NULL),
+(200033, 'hai', '1', 'Hài', '12121@a', '1', NULL),
+(200034, NULL, NULL, 'Hạnh Lê', '', NULL, '2697727203777492');
 
 -- --------------------------------------------------------
 
@@ -189,13 +190,13 @@ ALTER TABLE `homework`
 -- AUTO_INCREMENT cho bảng `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT cho bảng `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200034;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200035;
 
 --
 -- AUTO_INCREMENT cho bảng `teacher`
