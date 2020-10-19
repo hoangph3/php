@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level']))  {
   if (isset($_GET['task'])){
     $your_task =$_GET['task'];
   }
@@ -29,7 +26,7 @@ else {
 
   <ul>
     <?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
     ?>
     <li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -85,5 +82,8 @@ else {
     <h2>Contact me</h2>
     <p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
   </div>
-  <?php 
+  <?php
+} 
+else {
+  header("location: log_out.php");
 }

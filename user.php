@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id'])) {
-  header("location: index.php");
-}
-else {
+if($_SESSION['level'] == 0) {
   //Pagination
   if (isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -68,7 +65,7 @@ else {
           </thead>
           <tbody>
   <?php
-  $sql = "select * from student limit $start_from,$num_per_page";
+  $sql = "select * from user limit $start_from,$num_per_page";
   $list_student = execute_result($sql);
   foreach ($list_student as $sv) {
           echo '<tr>
@@ -82,7 +79,7 @@ else {
           </tbody>
           </table>
           <?php 
-              $pr_query = "select * from student";
+              $pr_query = "select * from user";
               $con = connect_db();
               $pr_result = mysqli_query($con, $pr_query);
               $total_record = mysqli_num_rows($pr_result);
@@ -113,4 +110,7 @@ else {
   </body>
   </html>
 <?php
+}
+else {
+  header("location: log_out.php");
 }

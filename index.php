@@ -2,26 +2,18 @@
 session_start();
 if (isset($_POST['dangnhap'])) 
 {
-    $connect = connect_db();
+    $conn = connect_db();
     $s_username = addslashes($_POST['username']);
     $s_userpwd = addslashes($_POST['userpwd']);
      
-	$sql_teacher = "select * from teacher where username = '$s_username' and userpwd = '$s_userpwd' ";
-	$query_teacher = mysqli_query($connect, $sql_teacher);
-	$row_teacher = mysqli_fetch_array($query_teacher);
-	
-	$sql_student = "select * from student where username = '$s_username' and userpwd = '$s_userpwd' ";
-	$query_student = mysqli_query($connect, $sql_student);
-	$row_student = mysqli_fetch_array($query_student);
-     
-    if (($row_teacher['username'] == $s_username) && ($row_teacher['userpwd'] == $s_userpwd)){
-        $_SESSION['auth'] = $s_username; 
+	$sql = " select * from user where username = '$s_username' and userpwd = '$s_userpwd' ";
+    $query = mysqli_query($conn, $sql);
+    $user = mysqli_fetch_array($query);     
+
+    if (mysqli_num_rows($query) > 0){
+        $_SESSION['email'] = $user['email']; 
         header("location: authentication.php");
-	}
-	else if(($row_student['username'] == $s_username) && ($row_student['userpwd'] == $s_userpwd)){
-        $_SESSION['auth'] = $s_username; 
-        header("location: authentication.php");
-	}
+    }
 	else {
 		header("location: index.php");
 	}

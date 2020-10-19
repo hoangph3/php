@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level']))  {
   if (isset($_GET['page'])) {
     $page = $_GET['page'];
   }
@@ -35,7 +32,7 @@ else {
 
 <ul>
   <?php 
-  if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+  if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
   else echo '<li><a href="user.php">Home</a></li>';
   ?>
   <li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -55,7 +52,7 @@ else {
   </div>
   <div class="main">
     <?php 
-    if ($_SESSION['id']>500) {
+    if ($_SESSION['level'] == 0) {
       echo ''; 
       }
   else {
@@ -100,7 +97,7 @@ $split_files = array_slice($files, $start_from, $num_per_page);
 
 foreach($split_files as $file){
   echo "<tr><td><a href='download.php?file=".$file."'>".$file."</a></td>";
-  if ($_SESSION['id'] < 500) {
+  if ($_SESSION['level'] == 1) {
     echo '<td><button onclick=\'window.open("submission.php?task='.$file.'","_self")\'>View Submissions</button></td>';
   }
   else {
@@ -137,4 +134,7 @@ foreach($split_files as $file){
   <p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
 </div>
 <?php
+}
+else{
+  header("location: log_out.php");
 }

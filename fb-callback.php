@@ -44,18 +44,17 @@ $email = $me->getEmail();
 $facebook_id = $me->getId();
 
 $conn = connect_db();
-$sql = 'select * from student where facebook_id = '.$facebook_id;
+$sql = 'select * from user where facebook_id = ' . $facebook_id;
 $query = mysqli_query($conn, $sql);
 if (mysqli_num_rows($query) > 0) {
     $result = mysqli_fetch_array($query);
 }
 else {
-    $sql = " insert into student(fullname, email, facebook_id) value ('$fullname', '$email', '$facebook_id') "; 
+    $sql = " insert into user(fullname, email, facebook_id) value ('$fullname', '$email', '$facebook_id') "; 
     execute($sql);
-    $sql = 'select * from student where facebook_id = '.$facebook_id;
+    $sql = 'select * from user where facebook_id = ' . $facebook_id;
     $query = mysqli_query($conn, $sql);
     $result = mysqli_fetch_array($query);
 }
-$_SESSION['id'] = $result['id'];
-$_SESSION['facebook_id'] = $facebook_id;
-header("location: user.php");
+$_SESSION['email'] = $email;
+header("location: authentication.php");

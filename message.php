@@ -1,12 +1,9 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level'])) {
   if(isset($_SESSION['username'])) $s_sender = $_SESSION['username']; else $s_sender='';
 	$id = $_GET['id'];
-	$sql = "select * from student where id=" .$id;
+	$sql = "select * from user where id=" .$id;
 	$list_student = execute_result($sql) ;
 	if ($list_student != null && count($list_student) > 0) {
 		$sv        = $list_student[0];
@@ -16,16 +13,13 @@ else {
 	}
 
 	$s_receiver = $s_username;
-
 	if (isset($_POST['message'])) 
 	{		
     $s_content = $_POST['content'];
 		$sql = "insert into message(sender, receiver, content, time) 
 		value ('$s_sender', '$s_receiver', '$s_content', NOW() )";
 		execute($sql); 
-		 
-		if ($_SESSION['id']<500) header("location: admin.php");
-		else header("location: user.php");
+		header("location: message_box.php");
 	}
 ?>
   <!DOCTYPE html>
@@ -51,7 +45,7 @@ else {
 
   <ul>
     <?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
     ?>
     <li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -78,7 +72,7 @@ else {
         </div><br/>
 		<div class="w3-container">
 			<label for="receiver">To</label>
-			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="receiver" name="receiver" value="<?=$s_username?>">
+			<input required="true" type="text" class="w3-input w3-animate-input" style="width:50%" id="receiver" name="receiver" value="<?=$s_username?>" readonly>
 		</div><br/>
 		<div class="w3-container">
 			<label for="content">Content</label>
@@ -99,4 +93,7 @@ else {
 </html>
 
 <?php 
+}
+else {
+  header("location: log_out.php");
 }

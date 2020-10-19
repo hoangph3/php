@@ -1,37 +1,26 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level'])) {
 	$s_sender = $s_receiver = $s_content = '';
-
 	if (!empty($_POST)) {
-	
 		$s_id = '';
 		$s_sender = addslashes(isset($_POST['sender']) ? $_POST['sender'] : '');
 		$s_receiver = addslashes(isset($_POST['receiver']) ? $_POST['receiver'] : '');
-		
 		$s_content = $_POST['content'];
-	
+
 		$s_id = addslashes(isset($_POST['id']) ? $_POST['id'] : '');
-	
 		if ($s_id != '') { 
 			$sql = "update message set content = '$s_content', time = NOW() where id = " .$s_id;
 		}
-		
 		execute($sql);
 		header('Location: message_box.php');
 		die();
 	}
-	
 	$id = '';
 	if (isset($_GET['id'])) {
-	
 		$id          = $_GET['id'];
 		$sql         = 'select * from message where id = '.$id; 
 		$list_msg = execute_result($sql);
-		
 		if ($list_msg != null && count($list_msg) > 0) {
 			$msg       = $list_msg[0];
 			$s_sender = $msg['sender'];
@@ -66,7 +55,7 @@ else {
 
   <ul>
     <?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
 	?>
 	<li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -115,5 +104,8 @@ else {
 </html>
 
 <?php 
+}
+else {
+	header("location: log_out.php");
 }
 

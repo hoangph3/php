@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level']))  {
 
 if(isset($_GET['file']))
 {
@@ -48,4 +45,7 @@ if (file_exists($file))
     }
   } 
 }
-?>
+else {
+  header("location: log_out.php");
+}
+

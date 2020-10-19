@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level']))  {
 	$s_username = $s_userpwd = $s_fullname = $s_email = $s_phone = '';
 	if (!empty($_POST)) {
 		$s_id = '';
@@ -15,21 +12,21 @@ else {
 		$s_id = addslashes(isset($_POST['id']) ? $_POST['id'] : '');
 
 		if ($s_id != '') { 
-			$sql = "update student set username = '$s_username', userpwd = '$s_userpwd', 
+			$sql = "update user set username = '$s_username', userpwd = '$s_userpwd', 
 			fullname = '$s_fullname', email = '$s_email', phone = '$s_phone' where id = " .$s_id; 
 		} else {
-			$sql = "insert into student(username, userpwd, fullname, email, phone) 
+			$sql = "insert into user(username, userpwd, fullname, email, phone) 
 			value ('$s_username', '$s_userpwd', '$s_fullname', '$s_email', '$s_phone')"; 
 		}
 		execute($sql);
-		if ($_SESSION['id']<500) header("location: admin.php");
+		if ($_SESSION['level'] == 1) header("location: admin.php");
 		else header("location: user.php");
 		die();
 	}
 	$id = '';
 	if (isset($_GET['id'])) {
 		$id          = $_GET['id'];
-		$sql         = 'select * from student where id = '.$id; 
+		$sql         = 'select * from user where id = '.$id; 
 		$list_student = execute_result($sql);
 		if ($list_student != null && count($list_student) > 0) {
 			$sv        = $list_student[0];
@@ -64,7 +61,7 @@ else {
 
 	<ul>
 	<?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
 	?>
 	<li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -89,7 +86,7 @@ else {
 				<label for="username">Username</label>
 				<input type="number" name="id" value="<?=$id?>" style="display: none;">
 				<?php 
-				if (($_SESSION['id']<500) || isset($_SESSION['facebook_id'])) { ?>
+				if ($_SESSION['level'] == 1 || isset($_SESSION['facebook_id'])) { ?>
 				<input required="true" class="w3-input w3-animate-input" type="text" style="width:50%" id="username" name="username" value="<?=$s_username?>"><br/> 
 				<?php }
 				else { ?> 
@@ -103,7 +100,7 @@ else {
 			<div class="w3-container">
 				<label for="fullname">Full name</label>
 				<?php 
-				if ($_SESSION['id']<500 || isset($_SESSION['facebook_id'])) { ?>
+				if ($_SESSION['level'] == 1 || isset($_SESSION['facebook_id'])) { ?>
 				<input required="true" class="w3-input w3-animate-input" type="text" style="width:50%" id="fullname" name="fullname" value="<?=$s_fullname?>"><br/> 
 				<?php }
 				else { ?>
@@ -133,4 +130,7 @@ else {
 	</html>
 
 	<?php 
+}
+else{
+	header("location: log_out.php");
 }

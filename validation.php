@@ -1,30 +1,25 @@
 <?php require_once 'utils.php';
 session_start();
-$connect = connect_db();
 if (isset($_POST['validation'])){
     $auth_code = addslashes($_POST['authcode']);
     if($auth_code == $_SESSION['auth_code'])
     {
-        $s_username = $_SESSION['auth'];
-        $sql_teacher = " select * from teacher where username = '$s_username' ";
-        $query_teacher = mysqli_query($connect, $sql_teacher);
-        $row_teacher = mysqli_fetch_array($query_teacher);
-        
-        $sql_student = " select * from student where username = '$s_username' ";
-        $query_student = mysqli_query($connect, $sql_student);
-        $row_student = mysqli_fetch_array($query_student);
+        $conn = connect_db();
+        $s_email = $_SESSION['email'];
+        $sql = " select * from user where email = '$s_email' ";
+        $query = mysqli_query($conn, $sql);
+        $user = mysqli_fetch_array($query);
 
-        if (($row_teacher['username'] == $s_username)){
-            $_SESSION['username'] = $row_teacher['username'];
-            $_SESSION['userpwd'] = $row_teacher['userpwd'];
-            $_SESSION['id'] = $row_teacher['id'];
-            header("location: "."admin.php?id=".$_SESSION['id']);
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['facebook_id'] = $user['facebook_id'];
+        $_SESSION['level'] = $user['level'];
+
+        if($_SESSION['level'] == 1){            
+            header("location: admin.php");
         }
-        else if(($row_student['username'] == $s_username)){
-            $_SESSION['username'] = $row_student['username'];
-            $_SESSION['userpwd'] = $row_student['userpwd'];
-            $_SESSION['id'] = $row_student['id'];
-            header("location: "."user.php?id=".$_SESSION['id']);
+        else if($_SESSION['level'] == 0){
+            header("location: user.php");
         }
     }
     else {
@@ -33,10 +28,9 @@ if (isset($_POST['validation'])){
 }
 
 ?>
-<!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Authentication</title>
         <style>
 body{
     margin: 0;
@@ -174,7 +168,7 @@ li a:hover{
         <header>
             <h1>Authentication</h1>
         </header>
-        <form method="post" action="">
+        <form method="post" action="validation.php">
 		<div id="loginbox">
             <label id="authcode">
                 <p>Enter your code</p>

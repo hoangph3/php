@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level'])) {
   if (isset($_GET['task'])){
     $your_task =$_GET['task'];
   }
@@ -99,4 +96,7 @@ foreach ($list_submit as $submit) {
   <p>Viettel Cyber Security, 41st Floor, Keangnam 72 Landmark Building, Pham Hung Str., Nam Tu Liem Dist., Hanoi</p>
 </div>
 <?php 
+}
+else {
+  header("location: log_out.php");
 }

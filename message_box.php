@@ -1,10 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
-	
+if(isset($_SESSION['level'])) {
 	//Pagination
 	if (isset($_GET['page'])) {
 	  $page = $_GET['page'];
@@ -14,7 +10,6 @@ else {
 	}
 	$num_per_page = 03;
 	$start_from = ($page - 1)*03;
-
 
 	//Pagination
 	if (isset($_GET['ibpage'])) {
@@ -48,7 +43,7 @@ else {
 
 <ul>
 	<?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
 	?>
 	<li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -193,4 +188,7 @@ foreach ($list_msg as $msg) {
 </script>
 
 <?php 
+}
+else{
+	header("location: log_out.php");
 }

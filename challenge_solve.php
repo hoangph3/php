@@ -1,9 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if (empty($_SESSION['id']) && empty($_SESSION['username'])) {
-  header("location: index.php");
-}
-else {
+if(isset($_SESSION['level'])) {
   ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -26,10 +23,8 @@ else {
 
   <ul>
     <?php 
-    if ($_SESSION['id']<500) echo '<li><a href="admin.php">Home</a></li>';
-    else echo '<li><a href="user.php">Home</a></li>';
-    
-    
+    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
+    else echo '<li><a href="user.php">Home</a></li>';    
     if (isset($_GET['id']))
     {
         $id = $_GET['id'];
@@ -104,4 +99,7 @@ if (isset($_POST['submit'])){
 </div>
 
 <?php 
+}
+else{
+  header("location: log_out.php");
 }
