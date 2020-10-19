@@ -1,6 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if(isset($_SESSION['level']))  {
+if(isset($_SESSION['level'])) {
   ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -25,7 +25,7 @@ if(isset($_SESSION['level']))  {
 
   <ul>
     <?php 
-    if ($_SESSION['level'] == 1) echo '<li><a href="admin.php">Home</a></li>';
+    if ($_SESSION['level']==1) echo '<li><a href="admin.php">Home</a></li>';
     else echo '<li><a href="user.php">Home</a></li>';
     ?>
     <li><a href= <?php echo "message_box.php"?> >Mailbox</a></li>
@@ -45,15 +45,23 @@ if(isset($_SESSION['level']))  {
     </div>
     <div class="main">
       <h2 style="text-align:left;float:left;" >Infomation</h2>
-      <?php echo '<button style="text-align:right;float:right;" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align"
-      <i class="w3-padding fa fa-pencil"></i> onclick=\'window.open("message.php?id='.$sv['id'].'","_self")\'
-      >Send Message</button>';
-
-  
+          <table class="styled-table">
+          <thead>
+              <tr>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>Full name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th width="140"></th>
+              </tr>
+          </thead>
+          <tbody>
+  <?php
     $id = '';
     if (isset($_GET['id'])) {
         $id          = $_GET['id'];
-        $sql         = 'select * from user where id = '.$id;
+        $sql         = " select * from user where id = '$id' ";
         $list_student = execute_result($sql);
         
         if ($list_student != null && count($list_student) > 0) {
@@ -68,29 +76,19 @@ if(isset($_SESSION['level']))  {
         }
     } 
   $list_student = execute_result($sql);
+  foreach ($list_student as $sv) {
+          echo '<tr>
+                  <td>'.$sv['username'].'</td>
+                  <td>'.$sv['userpwd'].'</td>
+                  <td>'.$sv['fullname'].'</td>
+                  <td>'.$sv['email'].'</td>
+                  <td>'.$sv['phone'].'</td>
+                  <td><button onclick=\'window.open("message.php?id='.$sv['id'].'","_self")\'>Send Message</button></td>
+                </tr>';
+        }
   ?>
-  <form class="w3-container">
-    <div class="w3-container">
-        <label for="username">Username</label>
-        <input class="w3-input" type="text" style="width:100%" name="username" value="<?=$sv['username']?>" readonly><br/> 
-    </div>
-    <div class="w3-container">
-        <label for="password">Password</label>
-        <input class="w3-input" type="password" style="width:100%" name="password" value="<?=$sv['userpwd']?>" readonly><br/>
-    </div>
-    <div class="w3-container">
-        <label for="fullname">Full name</label>
-        <input class="w3-input" type="text" style="width:100%" name="fullname" value="<?=$sv['fullname']?>" readonly><br/> 
-    </div>
-    <div class="w3-container">
-        <label for="email">Email</label>
-        <input class="w3-input" type="email" style="width:100%" name="email" value="<?=$sv['email']?>" readonly><br/>
-    </div>
-    <div class="w3-container">
-        <label for="phone">Phone</label>
-        <input class="w3-input" type="text" style="width:100%" name="phone" value="<?=$sv['phone']?>" readonly><br/>
-    </div>
-</form>
+          </tbody>
+          </table>
 
     </div>
   </div>
@@ -103,9 +101,6 @@ if(isset($_SESSION['level']))  {
   </html>
 <?php
 }
-else{
+else {
   header("location: log_out.php");
 }
-
-
-

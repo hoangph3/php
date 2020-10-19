@@ -1,6 +1,6 @@
 <?php require_once 'utils.php';
 session_start();
-if($_SESSION['level'] == 1) {
+if(isset($_SESSION['level']) && $_SESSION['level'] == 1) {
   //Pagination
   if (isset($_GET['page'])) {
     $page = $_GET['page'];

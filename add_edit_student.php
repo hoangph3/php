@@ -19,6 +19,9 @@ if(isset($_SESSION['level']))  {
 			value ('$s_username', '$s_userpwd', '$s_fullname', '$s_email', '$s_phone')"; 
 		}
 		execute($sql);
+		if(is_null($_SESSION['username'])){
+			$_SESSION['username'] = $s_username;
+		}
 		if ($_SESSION['level'] == 1) header("location: admin.php");
 		else header("location: user.php");
 		die();

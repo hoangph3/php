@@ -62,7 +62,6 @@ if(isset($_SESSION['level'])) {
         <thead>
             <tr>
                 <th>Username</th>
-                <th>File name</th>
                 <th>Time Submit</th>
                 <th>Download</th>
             </tr>
@@ -79,7 +78,6 @@ $list_submit = execute_result($sql);
 foreach ($list_submit as $submit) {
     echo '<tr>
         <td>'.$submit['username'].'</td>
-        <td>'.$submit['filename'].'</td>
         <td>'.$submit['time'].'</td>'
         ."<td><a href='download.php?answer=".$dir.$submit['filename']."'>".$submit['filename']."</a></td>
           </tr>";
